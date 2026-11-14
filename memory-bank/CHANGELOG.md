@@ -2,6 +2,12 @@
 
 ## 2026-11-14
 
+- Renamed the shared header, footer, and page titles to NFHS India. Verified the static build and route checks.
+
+- Removed the search field from all 28 State factsheets. Verified that the indicator explorer still has search.
+
+- Renamed State dashboard pages to State factsheets and removed their introductory sentence. Verified the static build and copy on all 28 State routes.
+
 - Added the [reference alignment checkpoints](phases/REFERENCE-ALIGNMENT.md), a reference-inspired homepage, saved dark mode, an official reports library, and bulk State selection and sorting. Verified the static export and route checks.
 
 - Prepared the initial GitHub baseline of the verified local Phase 1 build. The commit includes application source, build inputs, and the memory bank. Build output and generated data are reproducible from the tracked inputs.

@@ -39,7 +39,7 @@ export default function Explorer({mode,place,initialId}:{mode:Mode;place?:Place;
   },[keys,datasets]);
   const filters=<div className="filters">
     <label className="control">Category<select value={category} onChange={e=>setCategory(e.target.value)}><option value="">All categories</option>{categories.map(c=><option key={c}>{c}</option>)}</select></label>
-    <label className="control">Search indicators<div className="search"><Search size={16}/><input type="search" value={query} onChange={e=>setQuery(e.target.value)} placeholder="Search by name"/></div></label>
+    {mode!=='state'&&<label className="control">Search indicators<div className="search"><Search size={16}/><input type="search" value={query} onChange={e=>setQuery(e.target.value)} placeholder="Search by name"/></div></label>}
     <label className="control">Comparison status<select value={mapping} onChange={e=>setMapping(e.target.value)}><option value="">All statuses</option><option value="reviewed">Reviewed mapping</option><option value="pending">Mapping pending</option></select></label>
   </div>;
   if(mode==='indicators')return <section className="panel">{filters}<p role="status" className="muted">{visible.length} indicators</p><div className="table-wrap"><table><thead><tr><th>Indicator</th><th>Category</th><th>Unit</th><th>Survey rounds</th><th>Comparison status</th></tr></thead><tbody>{visible.map(item=><tr key={item.id}><th scope="row"><Link href={'/indicators/'+item.id+'/'}>{item.name}</Link></th><td>{item.category}</td><td>{item.unit}</td><td>{[item.five&&'NFHS-5',item.six&&'NFHS-6'].filter(Boolean).join(' · ')}</td><td>{item.reviewed?'Reviewed':'Mapping pending'}</td></tr>)}</tbody></table></div></section>;

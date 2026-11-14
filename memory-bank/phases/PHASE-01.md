@@ -2,6 +2,8 @@
 
 **Status** Local build available. Production acceptance in progress.
 
+[Reference alignment checkpoints](REFERENCE-ALIGNMENT.md)
+
 - [ ] Complete the Phase 1 development stages.
   - [ ] [Stage 1 · Data Foundation](STAGE-01-DATA-FOUNDATION.md)
   - [ ] [Stage 2 · UI/UX Design](STAGE-02-UI-UX-DESIGN.md)

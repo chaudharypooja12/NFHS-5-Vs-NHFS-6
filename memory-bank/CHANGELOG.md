@@ -2,6 +2,8 @@
 
 ## 2026-11-14
 
+- Added the [reference alignment checkpoints](phases/REFERENCE-ALIGNMENT.md), a reference-inspired homepage, saved dark mode, an official reports library, and bulk State selection and sorting. Verified the static export and route checks.
+
 - Prepared the initial GitHub baseline of the verified local Phase 1 build. The commit includes application source, build inputs, and the memory bank. Build output and generated data are reproducible from the tracked inputs.
 
 - Built the local Phase 1 portal and exported 28 State routes, 212 indicator routes, and all dashboard menus. Verified route output and map shape coverage, then smoke-tested State search, rankings, Manipur availability, and CSV download in the browser. Full mapping review, production accessibility and performance checks, and Vercel deployment remain open.

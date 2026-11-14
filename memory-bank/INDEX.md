@@ -9,6 +9,7 @@ Review this index and the linked documents before making changes. Update affecte
 | [TRD](TRD.md) | Architecture, data contracts, comparison rules, and verification |
 | [Design](DESIGN.md) | Dashboard layouts, navigation, visualizations, and accessibility |
 | [Phase and stage checklists](phases/INDEX.md) | Tasks, subtasks, status, and release verification |
+| [Reference alignment](phases/REFERENCE-ALIGNMENT.md) | Reference review, gap analysis and checkpoints |
 | [Roadmap](ROADMAP.md) | Product phases, development stages, exit checks, and open decisions |
 | [Structure](STRUCTURE.md) | Documentation on disk and planned application files |
 | [Modules](modules/INDEX.md) | Dashboard menu notes and verification |

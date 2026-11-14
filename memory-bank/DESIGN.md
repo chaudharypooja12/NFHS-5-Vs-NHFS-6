@@ -26,4 +26,4 @@ See the [planned routes](STRUCTURE.md) and the [complete design specification](P
 
 See the [dashboard menu index](modules/INDEX.md) for the route-level design notes.
 
-The local implementation uses a purple-accented survey overview, searchable State directory, indicator-colored map, comparison charts, and responsive tables. Published values link to the fact sheets. The method and source pages explain unavailable data and pending mappings.
+The local implementation uses an indigo header, saved dark-mode preference, comparison highlights carousel, survey coverage cards, reports library, searchable State directory, indicator-colored map, comparison charts, and responsive tables. Published values link to the fact sheets. The method and source pages explain unavailable data and pending mappings.

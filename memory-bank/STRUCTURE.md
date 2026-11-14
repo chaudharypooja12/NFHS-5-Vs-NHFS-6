@@ -56,6 +56,7 @@ app/
 │   ├── page.tsx
 │   └── [slug]/page.tsx
 ├── methodology/page.tsx
+├── reports/page.tsx
 └── sources/page.tsx
 components/
 ├── layout/

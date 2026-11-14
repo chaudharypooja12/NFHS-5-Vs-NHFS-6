@@ -54,7 +54,7 @@ export default function Explorer({mode,place,initialId}:{mode:Mode;place?:Place;
   });
   const sorted=rank?ranking:rows.sort((a,b)=>{
     if(sort==='change')return (b.change??-Infinity)-(a.change??-Infinity)||a.name.localeCompare(b.name);
-    if(sort==='5'||sort==='6'){const field=sort==='5'?'five':'six';return (b[field]?.value??-Infinity)-(a[field]?.value??-Infinity)||a.name.localeCompare(b.name);}
+    if(sort==='5'||sort==='6'||sort==='6-asc'){const field=sort==='5'?'five':'six';const left=a[field]?.value;const right=b[field]?.value;if(left==null||right==null)return Number(left==null)-Number(right==null)||a.name.localeCompare(b.name);return (sort==='6-asc'?left-right:right-left)||a.name.localeCompare(b.name);}
     return a.name.localeCompare(b.name);
   });
   const ready=keys.every(key=>datasets[key]);
@@ -67,14 +67,14 @@ export default function Explorer({mode,place,initialId}:{mode:Mode;place?:Place;
     const link=document.createElement('a');link.href=url;link.download='nfhs-'+indicator.id+'.csv';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
   }
   return <>
-    {mode==='compare'&&<section className="panel"><h2>Choose States</h2><div className="check-grid">{states.map(s=><label key={s.slug}><input type="checkbox" checked={selected.includes(s.slug)} onChange={e=>setSelected(e.target.checked?[...selected,s.slug]:selected.filter(key=>key!==s.slug))}/>{s.name}</label>)}</div></section>}
+    {mode==='compare'&&<section className="panel"><div className="section-title"><h2>Choose States</h2><div className="carousel-controls"><button className="button secondary" onClick={()=>setSelected(states.map(s=>s.slug))}>Select all</button><button className="button secondary" onClick={()=>setSelected([])}>Clear</button></div></div><div className="check-grid">{states.map(s=><label key={s.slug}><input type="checkbox" checked={selected.includes(s.slug)} onChange={e=>setSelected(e.target.checked?[...selected,s.slug]:selected.filter(key=>key!==s.slug))}/>{s.name}</label>)}</div></section>}
     <section className="panel explorer">
     {mode!=='indicator'&&filters}
     {mode!=='indicator'&&<label className="control select-main">Indicator<select value={indicator?.id||''} onChange={e=>setId(e.target.value)} disabled={!visible.length}>{!visible.length&&<option value="">No indicators match</option>}{visible.map(i=><option key={i.id} value={i.id}>{i.name}</option>)}</select></label>}
     {indicator&&<>
       <div className="controls-row">
       {rank&&<label className="control">Rank by<select value={round} onChange={e=>setRound(e.target.value)}><option value="6">NFHS-6 value</option><option value="5">NFHS-5 value</option><option value="change">Absolute change</option></select></label>}
-      {keys.length>1&&<label className="control">Sort<select value={sort} onChange={e=>setSort(e.target.value)}><option value="name">{rank?'Default order':'State name'}</option>{rank?<><option value="asc">Lowest first</option><option value="desc">Highest first</option></>:<><option value="5">NFHS-5 value</option><option value="6">NFHS-6 value</option><option value="change">Absolute change</option></>}</select></label>}
+      {keys.length>1&&<label className="control">Sort<select value={sort} onChange={e=>setSort(e.target.value)}><option value="name">{rank?'Default order':'State name'}</option>{rank?<><option value="asc">Lowest first</option><option value="desc">Highest first</option></>:<><option value="5">NFHS-5 value</option><option value="6">NFHS-6 value · high to low</option><option value="6-asc">NFHS-6 value · low to high</option><option value="change">Absolute change</option></>}</select></label>}
       <label className="control">Data availability<select value={availability} onChange={e=>setAvailability(e.target.value)}><option value="">All values</option><option value="both">Both rounds</option><option value="missing">Missing a round</option></select></label>
       <label className="control">Observed change<select value={direction} onChange={e=>setDirection(e.target.value)}><option value="">All changes</option><option value="increase">Increased</option><option value="decrease">Decreased</option><option value="equal">Unchanged</option></select></label>
       </div>

@@ -12,6 +12,7 @@ Use the menu notes when planning and verifying a change. Phase 1 routes are avai
 | [Indicators](INDICATORS.md) | `/indicators and /indicators/[slug]` | 1 |
 | [Methodology](METHODOLOGY.md) | `/methodology` | 1 |
 | [Sources](SOURCES.md) | `/sources` | 1 |
+| [Reports](REPORTS.md) | /reports | 1 |
 | [Districts](DISTRICTS.md) | `/states/[slug]/districts` | 2 |
 
 - [Memory bank index](../INDEX.md)

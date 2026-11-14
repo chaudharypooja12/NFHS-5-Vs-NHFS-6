@@ -14,7 +14,7 @@ for(const state of states) {
   assert(existsSync('out/states/'+state.slug+'/index.html'),state.slug);
 }
 for(const indicator of indicators) assert(existsSync('out/indicators/'+indicator.id+'/index.html'),indicator.id);
-for(const route of ['dashboard','states','compare','rankings','indicators','methodology','sources'])assert(existsSync('out/'+route+'/index.html'),route);
+for(const route of ['dashboard','states','compare','rankings','indicators','methodology','sources','reports'])assert(existsSync('out/'+route+'/index.html'),route);
 assert.equal(Object.keys(json('out/data/manipur.json').rows[6]).length,0);
 assert(geoArea({type:'FeatureCollection',features})<1, 'Map winding or geometry is invalid');
 console.log('Verified 28 State routes and map shapes, '+indicators.length+' indicator routes, and all dashboard menus.');

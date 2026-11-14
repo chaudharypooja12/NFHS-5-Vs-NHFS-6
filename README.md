@@ -14,6 +14,7 @@ Union Territories are excluded from both phases. The planned stack is Next.js Ap
 - [Dashboard menu index](memory-bank/modules/INDEX.md)
 - [Full PRD](memory-bank/PRD.md)
 - [Phase and stage checklists](memory-bank/phases/INDEX.md)
+- [Reference alignment checkpoints](memory-bank/phases/REFERENCE-ALIGNMENT.md)
 - [Roadmap](memory-bank/ROADMAP.md)
 - [Current and planned file structure](memory-bank/STRUCTURE.md)
 - [Contributor instructions](AGENTS.md)

@@ -8,3 +8,5 @@ Show survey context, featured India indicators, the interactive map, and a searc
 
 - [Dashboard menu index](INDEX.md)
 - [NFHS Data](../NFHS-DATA.md)
+
+The Key highlights carousel displays six square indicator illustrations with accessible text alternatives and links to each indicator. It advances every five seconds, with pause and manual navigation controls and a reduced-motion preference. Survey coverage and State exploration use separate palettes in light and dark themes.

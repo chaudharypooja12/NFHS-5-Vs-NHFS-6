@@ -24,3 +24,8 @@
 - Documented both product phases, all six development stages, the planned application structure, and module responsibilities.
 - Checked documentation links and destination file contents. Source validation, application implementation, and deployment remain pending.
 - Initialized the project README, agent instructions, and memory bank. Documented the required memory-bank review before changes and updates after changes.
+
+## 15 November 2026 · Homepage highlights and colors
+
+- Added six illustrated indicator cards, five-second carousel rotation with pause, and distinct colors for the coverage, map, and State finder panels.
+- The static build completed and route checks passed. The side browser verified that the six images loaded and that the carousel advanced automatically.

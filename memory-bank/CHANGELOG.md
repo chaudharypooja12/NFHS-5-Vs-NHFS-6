@@ -33,3 +33,8 @@
 ## 15 November 2026 · Active navigation
 
 - Added a route-aware light-blue pill to the main navigation. Verified the production build and checked Overview, States, and State and indicator detail routes in the side browser.
+
+## 15 November 2026 · Responsive homepage layout
+
+- Expanded homepage content to the viewport, normalized section spacing, and gave the subtitle room to wrap naturally.
+- Verified the production build and checked 1920, 1440, 1366, 1024, 768, and 375 px widths in the browser. No page-level horizontal overflow was observed.

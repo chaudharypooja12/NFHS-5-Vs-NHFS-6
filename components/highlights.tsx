@@ -4,6 +4,25 @@ import Image from 'next/image';
 import Link from 'next/link';
 import {ChevronLeft,ChevronRight,Pause,Play} from 'lucide-react';
 export type Highlight={id:string;name:string;five:number;six:number;unit:string;change:string};
+
+function moveTrack(element:HTMLDivElement,direction:number,loop=false){
+ const card=element.firstElementChild;
+ if(!card)return;
+ const style=getComputedStyle(element);
+ const vertical=style.gridAutoFlow==='row';
+ const position=vertical?element.scrollTop:element.scrollLeft;
+ const end=vertical?element.scrollHeight-element.clientHeight:element.scrollWidth-element.clientWidth;
+ if(end<=0)return;
+ if(loop&&position>=end-2){
+   element.scrollTo({top:0,left:0,behavior:'instant'});
+   return;
+ }
+ const size=card.getBoundingClientRect();
+ const gap=parseFloat(vertical?style.rowGap:style.columnGap);
+ const step=direction*((vertical?size.height:size.width)+gap);
+ element.scrollBy(vertical?{top:step}:{left:step});
+}
+
 export default function Highlights({items}:{items:Highlight[]}){
  const track=useRef<HTMLDivElement>(null);
  const [playing,setPlaying]=useState(true);
@@ -18,19 +37,13 @@ export default function Highlights({items}:{items:Highlight[]}){
    if(!playing)return;
    const timer=window.setInterval(()=>{
      const element=track.current;
-     const card=element?.firstElementChild;
-     if(!element||!card||document.hidden)return;
-     const end=element.scrollWidth-element.clientWidth;
-     if(end<=0)return;
-     if(element.scrollLeft>=end-2)element.scrollTo({left:0,behavior:'instant'});
-     else element.scrollBy({left:card.getBoundingClientRect().width+14});
+     if(element&&!document.hidden)moveTrack(element,1,true);
    },5000);
    return ()=>window.clearInterval(timer);
  },[playing]);
  function move(direction:number){
    const element=track.current;
-   const card=element?.firstElementChild;
-   if(element&&card)element.scrollBy({left:direction*(card.getBoundingClientRect().width+14)});
+   if(element)moveTrack(element,direction);
  }
  return <section aria-labelledby="highlights"><div className="section-title"><h2 id="highlights">Key highlights</h2><div className="carousel-controls">
  <button aria-label={playing?'Pause highlight rotation':'Play highlight rotation'} onClick={()=>setPlaying(!playing)}>{playing?<Pause size={18}/>:<Play size={18}/>}</button>

@@ -15,7 +15,7 @@ export default function Home(){
   if(five?.value==null||six?.value==null||change==null)return [];
   return [{id,name:item.name,five:five.value,six:six.value,unit:item.unit,change:change===0?'Unchanged':changeText(change,item.unit)}];
  });
- return <div className="shell reference-home">
+ return <div className="reference-home w-full max-w-none px-4 sm:px-6 lg:px-8">
  <section className="reference-intro"><p className="eyebrow">NFHS-6 · 2023–24</p><h1>India NFHS-6 Performance</h1>
  <p>Explore official health, nutrition and household indicators across India’s {states.length} States, with NFHS-5 comparisons.</p></section>
  <Highlights items={featured}/>

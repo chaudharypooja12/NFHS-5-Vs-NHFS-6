@@ -43,3 +43,8 @@
 
 - Aligned the header, page content, and footer with a shared responsive gutter. Adjusted narrow navigation and form sizing to prevent page overflow.
 - Verified the production build and checked matching content edges and no page-level horizontal overflow on the seven main routes at 1440, 768, and 375 px.
+
+## 15 November 2026 · Mobile navigation and map range
+
+- Added a compact mobile navigation dropdown and published-value endpoints to the map legend.
+- TypeScript, production build, and route checks passed. Verified mobile navigation at seven widths and checked the legend with percentage and fertility indicators.

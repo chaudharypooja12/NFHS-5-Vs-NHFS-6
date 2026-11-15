@@ -38,3 +38,8 @@
 
 - Expanded homepage content to the viewport, normalized section spacing, and gave the subtitle room to wrap naturally.
 - Verified the production build and checked 1920, 1440, 1366, 1024, 768, and 375 px widths in the browser. No page-level horizontal overflow was observed.
+
+## 15 November 2026 · Shared page alignment
+
+- Aligned the header, page content, and footer with a shared responsive gutter. Adjusted narrow navigation and form sizing to prevent page overflow.
+- Verified the production build and checked matching content edges and no page-level horizontal overflow on the seven main routes at 1440, 768, and 375 px.

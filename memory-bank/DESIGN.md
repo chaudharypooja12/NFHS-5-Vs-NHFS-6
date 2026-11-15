@@ -29,3 +29,5 @@ See the [dashboard menu index](modules/INDEX.md) for the route-level design note
 NFHS India uses an indigo header, saved dark-mode preference, comparison highlights carousel, survey coverage cards, reports library, searchable State directory, indicator-colored map, comparison charts, and responsive tables. Published values link to the fact sheets. The method and source pages explain unavailable data and pending mappings.
 
 The main navigation uses a light-blue pill to mark the current page or parent section, with the current item exposed to assistive technology.
+
+The header, page content, and footer use the same full-width shell with responsive side gutters. The narrow-screen navigation wraps its links and retains the active route indicator.

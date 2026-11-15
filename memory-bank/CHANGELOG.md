@@ -29,3 +29,7 @@
 
 - Added six illustrated indicator cards, five-second carousel rotation with pause, and distinct colors for the coverage, map, and State finder panels.
 - The static build completed and route checks passed. The side browser verified that the six images loaded and that the carousel advanced automatically.
+
+## 15 November 2026 · Active navigation
+
+- Added a route-aware light-blue pill to the main navigation. Verified the production build and checked Overview, States, and State and indicator detail routes in the side browser.

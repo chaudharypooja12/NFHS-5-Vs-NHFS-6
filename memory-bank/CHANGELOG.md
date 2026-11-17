@@ -2,6 +2,8 @@
 
 ## 2026-11-17
 
+- Changed only the footer copyright strip to pure white with dark blue text and its existing LinkedIn link. Preserved the upper disclaimer, footer content, alignment, font, and spacing. Verified the production build, colors/text/link on Overview, All States, Indicators, and Reports, plus mobile overflow and light/dark presentation.
+
 - Consolidated Rankings into the All States table with NFHS-6, NFHS-5, and eligible-change rank modes, direction-aware ranks, ties, comparison status, and validated change columns. Reused State selection, indicator selection, sorting, factsheet actions, and XLS export. Removed the standalone rankings mode and unused ranking chart branches. The old Rankings URL forwards to All States and its menu entry is removed.
 - Added clear empty-result messages and reset actions. Missing survey values display N/A. Original datasets, Overview and Reports sources, header/footer styles, branding, disclaimer, and external links were unchanged.
 - Verified production build and TypeScript, static route checks, ranking regression checks, real-data direction/eligibility, XLS contents, selection persistence, ranking modes, context labels, legacy forwarding, 212 catalog indicators and reset behavior, Overview highlights/search, Reports, desktop/tablet/mobile layouts, and browser error logs. No lint script or lint configuration is present in the project.

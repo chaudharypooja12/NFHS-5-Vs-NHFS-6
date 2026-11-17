@@ -115,6 +115,8 @@ body{display:flex;flex-direction:column;min-height:100vh;min-height:100dvh}
 .footer-links a{display:inline-flex;align-items:center;gap:4px;min-height:32px}
 .footer-links svg{flex:none}
 .footer-copyright{margin-top:20px;padding-top:14px;border-top:1px solid #ffffff50;font-size:13px;text-align:center}
+.footer-copyright{background:#fff;color:var(--site-bar);margin-inline:calc(-1 * var(--page-gutter));padding-inline:var(--page-gutter);padding-bottom:16px;margin-bottom:-16px;border-top-color:#fff}
+.footer .footer-copyright a{color:inherit}
 .state-selection{flex-wrap:wrap;margin-block:12px}
 .india-option input{margin-inline-end:5px;accent-color:var(--accent)}
 .state-chart{max-height:28rem;overflow:auto}

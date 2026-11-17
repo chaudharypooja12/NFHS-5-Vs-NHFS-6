@@ -36,4 +36,6 @@ The page scrollbar follows the active theme and uses the browser's default styli
 
 The shared footer places the project disclaimer beside navigation on desktop, stacks the content on mobile, and uses the active theme palette.
 
+The bottom copyright strip uses pure white with dark blue text and retains its existing LinkedIn link, centered alignment, font, and spacing in both themes. The upper disclaimer retains its blue background and white text.
+
 Page and section headings use decorative Lucide icons in the accent color, with 30 px page icons and 24 px section icons. Icons are hidden from assistive technology so heading names retain their existing text. Table headers share the accent background, surface-colored text, 12 px padding, and consistent typography and border styling in both themes.

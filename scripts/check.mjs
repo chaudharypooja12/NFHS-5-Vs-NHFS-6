@@ -16,7 +16,7 @@ for(const state of states) {
 for(const indicator of indicators) assert(existsSync('out/indicators/'+indicator.id+'/index.html'),indicator.id);
 for(const route of ['dashboard','states','compare','rankings','indicators','methodology','sources','reports'])assert(existsSync('out/'+route+'/index.html'),route);
 const allStates=readFileSync('out/states/index.html','utf8');
-assert.match(allStates, /<h1>All States<\/h1>/);
+assert.match(allStates, /<h1>[\s\S]*?All States<\/h1>/);
 assert.match(allStates, /Select States/);
 assert.match(allStates, /Select Indicators/);
 assert.match(allStates, /High to Low/);

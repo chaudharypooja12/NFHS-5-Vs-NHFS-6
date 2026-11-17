@@ -1,4 +1,6 @@
 'use client';
+import HeadingIcon from './heading-icon';
+
 import {useEffect,useRef,useState} from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -45,7 +47,7 @@ export default function Highlights({items}:{items:Highlight[]}){
    const element=track.current;
    if(element)moveTrack(element,direction);
  }
- return <section aria-labelledby="highlights"><div className="section-title"><h2 id="highlights">Key highlights</h2><div className="carousel-controls">
+ return <section aria-labelledby="highlights"><div className="section-title"><h2 id="highlights"><HeadingIcon name="highlights"/>Key highlights</h2><div className="carousel-controls">
  <button aria-label={playing?'Pause highlight rotation':'Play highlight rotation'} onClick={()=>setPlaying(!playing)}>{playing?<Pause size={18}/>:<Play size={18}/>}</button>
  <button aria-label="Previous highlight" onClick={()=>move(-1)}><ChevronLeft size={18}/></button>
  <button aria-label="Next highlight" onClick={()=>move(1)}><ChevronRight size={18}/></button>

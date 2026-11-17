@@ -1,11 +1,27 @@
 'use client';
+import HeadingIcon, {type HeadingIconName} from './heading-icon';
+
 import {useEffect,useMemo,useState} from 'react';
 import Link from 'next/link';
-import {ArrowDownWideNarrow,ArrowUpWideNarrow,Download,Search} from 'lucide-react';
+import {ArrowDownWideNarrow,ArrowUpWideNarrow,ChevronDown,Download,Search} from 'lucide-react';
 import SurveyChart from './charts';
 import {indicators,states,values,format,changeText,sourceLink,type Dataset,type Indicator,type Place,type Observation} from '../lib/model';
 
 const categories=[...new Set(indicators.map(item=>item.category))];
+const categoryIcons:Record<string,HeadingIconName>={
+  Households:'households',
+  Education:'education',
+  'Marriage and fertility':'marriage',
+  'Family planning':'family',
+  'Maternal and delivery care':'maternal',
+  'Child health':'childHealth',
+  'Child nutrition':'childNutrition',
+  'Adult nutrition':'adultNutrition',
+  Biomarkers:'biomarkers',
+  Healthcare:'healthcare',
+  'Women and gender':'women',
+  'Tobacco and alcohol':'tobacco',
+};
 const allPlaces=[{name:'India',slug:'india'},...states];
 const stateKeys=states.map(state=>state.slug);
 const unionTerritories=[
@@ -39,6 +55,7 @@ export default function Explorer({mode,place,initialId}:{mode:Mode;place?:Place;
   const [exporting,setExporting]=useState(false),[exportError,setExportError]=useState('');
   const [round,setRound]=useState('6'),[availability,setAvailability]=useState(''),[direction,setDirection]=useState(''),[mapping,setMapping]=useState('');
   const [datasets,setDatasets]=useState<Record<string,Dataset>>({}),[error,setError]=useState(false);
+  const [collapsedCategories,setCollapsedCategories]=useState<string[]>([]);
   const visible=useMemo(()=>indicators.filter(i=>(!category||i.category===category)&&i.name.toLowerCase().includes(query.toLowerCase())&&(!mapping||i.reviewed===(mapping==='reviewed'))),[category,query,mapping]);
   const indicator=visible.find(i=>i.id===id)||visible[0];
   const allStates=mode==='all-states';
@@ -61,7 +78,44 @@ export default function Explorer({mode,place,initialId}:{mode:Mode;place?:Place;
     {mode!=='state'&&<label className="control">Search indicators<div className="search"><Search size={16}/><input type="search" value={query} onChange={e=>setQuery(e.target.value)} placeholder="Search by name"/></div></label>}
     <label className="control">Comparison status<select value={mapping} onChange={e=>setMapping(e.target.value)}><option value="">All statuses</option><option value="reviewed">Reviewed mapping</option><option value="pending">Mapping pending</option></select></label>
   </div>;
-  if(mode==='indicators')return <section className="panel">{filters}<p role="status" className="muted">{visible.length} indicators</p><div className="table-wrap"><table><thead><tr><th>Indicator</th><th>Category</th><th>Unit</th><th>Survey rounds</th><th>Comparison status</th></tr></thead><tbody>{visible.map(item=><tr key={item.id}><th scope="row"><Link href={'/indicators/'+item.id+'/'}>{item.name}</Link></th><td>{item.category}</td><td>{item.unit}</td><td>{[item.five&&'NFHS-5',item.six&&'NFHS-6'].filter(Boolean).join(' · ')}</td><td>{item.reviewed?'Reviewed':'Mapping pending'}</td></tr>)}</tbody></table></div></section>;
+  if(mode==='indicators')return <section className="panel">
+    {filters}
+    <p role="status" className="muted">{visible.length} indicators</p>
+    <div className="indicator-categories">
+      {categories.map(categoryName=>{
+        const items=visible.filter(item=>item.category===categoryName);
+        if(!items.length)return null;
+        const total=indicators.filter(item=>item.category===categoryName).length;
+        const expanded=!collapsedCategories.includes(categoryName);
+        const groupId='indicator-category-'+categoryName.toLowerCase().replaceAll(' ','-');
+        return <section className="indicator-category" key={categoryName} aria-labelledby={groupId+'-heading'}>
+          <h2 id={groupId+'-heading'}>
+            <button className="category-toggle" type="button" aria-expanded={expanded} aria-controls={groupId} onClick={()=>setCollapsedCategories(previous=>expanded?[...previous,categoryName]:previous.filter(name=>name!==categoryName))}>
+              <HeadingIcon name={categoryIcons[categoryName]||'indicators'}/>
+              <span className="category-name">{categoryName}</span>
+              <span className="category-count">{items.length===total?total:items.length+' of '+total} indicators</span>
+              <ChevronDown className="category-chevron" size={20} aria-hidden="true"/>
+            </button>
+          </h2>
+          <div id={groupId} hidden={!expanded}>
+            <div className="table-wrap">
+              <table aria-label={categoryName+' indicators'}>
+                <thead><tr><th scope="col">Indicator</th><th scope="col">Category</th><th scope="col">Unit</th><th scope="col">Survey rounds</th><th scope="col">Comparison status</th></tr></thead>
+                <tbody>{items.map(item=><tr key={item.id}>
+                  <th scope="row"><Link href={'/indicators/'+item.id+'/'}>{item.name}</Link></th>
+                  <td>{item.category}</td>
+                  <td>{item.unit}</td>
+                  <td>{[item.five&&'NFHS-5',item.six&&'NFHS-6'].filter(Boolean).join(' · ')}</td>
+                  <td>{item.reviewed?'Reviewed':'Mapping pending'}</td>
+                </tr>)}</tbody>
+              </table>
+            </div>
+          </div>
+        </section>;
+      })}
+    </div>
+    {!visible.length&&<p className="notice">No indicators match these filters.</p>}
+  </section>;
   const rows=indicator?keys
     .map(key=>({key,name:allPlaces.find(p=>p.slug===key)!.name,...values(datasets[key],indicator)}))
     .filter(row=>!availability||(availability==='both'?row.five?.value!=null&&row.six?.value!=null:row.five?.value==null||row.six?.value==null))
@@ -123,7 +177,7 @@ export default function Explorer({mode,place,initialId}:{mode:Mode;place?:Place;
     return <div className="all-states-dashboard">
       <div className="state-performance-grid">
         <section className="panel state-selection-panel" aria-labelledby="state-selection-title">
-          <h2 id="state-selection-title">Select States</h2>
+          <h2 id="state-selection-title"><HeadingIcon name="selection"/>Select States</h2>
           <div className="selection-actions">
             <button type="button" onClick={()=>setSelected(selectionKeys)}>Select All</button>
             <button type="button" onClick={()=>setSelected([])}>Clear</button>
@@ -138,7 +192,7 @@ export default function Explorer({mode,place,initialId}:{mode:Mode;place?:Place;
           </div>
         </section>
         <section className="panel state-comparison-panel" aria-labelledby="state-comparison-title">
-          <h2 id="state-comparison-title">State Performance</h2>
+          <h2 id="state-comparison-title"><HeadingIcon name="performance"/>State Performance</h2>
           <div className="performance-controls">
             <label className="control performance-indicator">Select Indicators
               <select value={id} onChange={e=>setId(e.target.value)}>
@@ -179,7 +233,7 @@ export default function Explorer({mode,place,initialId}:{mode:Mode;place?:Place;
       <label className="control">Data availability<select value={availability} onChange={e=>setAvailability(e.target.value)}><option value="">All values</option><option value="both">Both rounds</option><option value="missing">Missing a round</option></select></label>
       <label className="control">Observed change<select value={direction} onChange={e=>setDirection(e.target.value)}><option value="">All changes</option><option value="increase">Increased</option><option value="decrease">Decreased</option><option value="equal">Unchanged</option></select></label>
       </div>
-      <div className="section-title"><div><h2>{indicator.name}</h2><p className="muted">{indicator.category} · {indicator.unit} · {indicator.reviewed?'Reviewed mapping':'Mapping pending'}</p></div><button className="button secondary" onClick={download} disabled={!ready||!sorted.length}><Download size={16}/> CSV</button></div>
+      <div className="section-title"><div><h2><HeadingIcon name="chart"/>{indicator.name}</h2><p className="muted">{indicator.category} · {indicator.unit} · {indicator.reviewed?'Reviewed mapping':'Mapping pending'}</p></div><button className="button secondary" onClick={download} disabled={!ready||!sorted.length}><Download size={16}/> CSV</button></div>
       {!indicator.reviewed&&<p className="notice">This measure is listed under its source survey round while the cross-round mapping is reviewed.</p>}
       {place?.slug==='manipur'&&<p className="notice">NFHS-6 data is unavailable for Manipur. Published NFHS-5 results are available below.</p>}
       {error?<p role="alert">Could not load survey data.</p>:!ready?<p role="status">Loading survey data…</p>:!sorted.length?<p role="status">No eligible observations for this selection.</p>:<>

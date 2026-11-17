@@ -2,6 +2,12 @@
 
 ## 2026-11-17
 
+- Grouped the Indicator Explorer's 212 indicators into 12 expandable category sections with themed icons and counts. Retained existing columns, detail links, and category/search/comparison-status filters. Filtered counts show matches against each category total.
+- Verified the static build and route checks, all 212 unique indicator links, keyboard collapse/expand, combined filters, empty results, and restoration of all indicators. Checked light/dark presentation and mobile page overflow.
+
+- Added themed decorative Lucide icons to all page and section headings, using a shared icon component and consistent sizing. Applied accent-colored table headers with contrasting surface-colored text, uniform padding, typography, and borders in both themes.
+- Verified the production build and route checks. Browser checks covered headings on Home, All States, Rankings, Indicators, Reports, Methodology, Sources, a State factsheet, and an indicator detail page. Confirmed table colors adapt to light/dark modes and checked mobile overflow.
+
 - Removed the standalone Institutional births section from All States, including its chart, heading, subtitle, CSV action, expandable table, unused export code, and section spacing. Verified the static build and route checks. The local browser showed one comparison table, no chart or CSV button, working NFHS-6 sorting, and the footer directly after the main content.
 
 - Redesigned All States into selection and performance cards. The scrollable checkbox list has Select All, Clear, and a counter. The performance card has one indicator selector, NFHS-6 sort buttons, and State/NFHS-6/NFHS-5/Actions columns with factsheet buttons. Removed the previous All States filter controls.

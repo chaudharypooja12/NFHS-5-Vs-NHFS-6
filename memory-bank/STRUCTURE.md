@@ -59,6 +59,7 @@ app/
 ├── reports/page.tsx
 └── sources/page.tsx
 components/
+├── heading-icon.tsx    # Shared decorative Lucide heading icons
 ├── layout/
 ├── dashboard/
 ├── charts/

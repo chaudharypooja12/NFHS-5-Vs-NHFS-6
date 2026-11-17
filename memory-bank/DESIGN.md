@@ -10,7 +10,7 @@ The PRD selects Option B. Use a light background, white cards, blue and indigo a
 | All States | Two columns with a scrollable State/UT checkbox panel and a performance card containing one indicator dropdown, NFHS-6 sorting buttons, four-column table, factsheet buttons, and XLS export. The cards stack on mobile. |
 | State factsheets | Each factsheet shows the State name under the State factsheet label, with an All States link, survey availability, filters, an indicator dropdown, metrics, grouped bars, a comparison table, and sources. |
 | Rankings | Indicator and ranking mode, round label, included count, sort controls, horizontal bars |
-| Indicators | Search and category browsing, definitions, units, survey availability, comparison status, detail pages and sources |
+| Indicators | Category accordions with themed icons and counts, existing search/category/status filters, five-column tables, definitions, units, survey availability, detail pages and sources |
 | Methodology and sources | Round differences, calculation rules, missing and provisional values, limitations, official references |
 
 ## Interaction and accessibility
@@ -36,3 +36,5 @@ Below 1024 px, the header uses a disclosure button to show the same navigation l
 The page scrollbar follows the active theme and uses the browser's default styling in forced-color mode.
 
 The shared footer places the project disclaimer beside navigation on desktop, stacks the content on mobile, and uses the active theme palette.
+
+Page and section headings use decorative Lucide icons in the accent color, with 30 px page icons and 24 px section icons. Icons are hidden from assistive technology so heading names retain their existing text. Table headers share the accent background, surface-colored text, 12 px padding, and consistent typography and border styling in both themes.

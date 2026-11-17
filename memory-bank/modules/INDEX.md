@@ -2,6 +2,8 @@
 
 Use the menu notes when planning and verifying a change. Phase 1 routes are available in the local build. District routes are planned for Phase 2.
 
+All implemented pages use the shared decorative heading icon component and theme-aware table headers described in [Design](../DESIGN.md).
+
 | Menu | Route | Phase |
 | --- | --- | --- |
 | [Home](HOME.md) | `/` | 1 |

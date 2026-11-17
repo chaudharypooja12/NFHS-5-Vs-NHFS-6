@@ -35,3 +35,5 @@ The header, page content, and footer use the same full-width shell with responsi
 Below 1024 px, the header uses a disclosure button to show the same navigation links in a dropdown. The route-aware highlight is shared across viewport sizes.
 
 The page scrollbar follows the active theme and uses the browser's default styling in forced-color mode.
+
+The shared footer places the project disclaimer beside navigation on desktop, stacks the content on mobile, and uses the active theme palette.

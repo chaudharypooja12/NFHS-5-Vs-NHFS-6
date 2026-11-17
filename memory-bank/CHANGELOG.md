@@ -64,3 +64,8 @@
 
 - Enlarged the homepage map by about 35 percent while preserving its proportions and controls.
 - The production build and route checks passed. Verified centering, all 28 State links, and no horizontal overflow at six viewport widths from 320 to 1440 px.
+
+## 17 November 2026 · Site footer
+
+- Added the project disclaimer, State Performance, official PDF, GitHub, and developer profile links to the shared footer.
+- Verified the production build and route checks, desktop and mobile footer alignment, and dark theme. The NFHS Official URL could not be independently verified due to its certificate chain.

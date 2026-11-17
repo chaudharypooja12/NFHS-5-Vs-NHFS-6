@@ -2,6 +2,13 @@
 
 ## 2026-11-17
 
+- Removed the standalone Institutional births section from All States, including its chart, heading, subtitle, CSV action, expandable table, unused export code, and section spacing. Verified the static build and route checks. The local browser showed one comparison table, no chart or CSV button, working NFHS-6 sorting, and the footer directly after the main content.
+
+- Redesigned All States into selection and performance cards. The scrollable checkbox list has Select All, Clear, and a counter. The performance card has one indicator selector, NFHS-6 sort buttons, and State/NFHS-6/NFHS-5/Actions columns with factsheet buttons. Removed the previous All States filter controls.
+- Added eight selectable UT display entries with unavailable results and no factsheet routes, following the updated UI request. Survey datasets and geographic routes retain their existing contents.
+- Added a lazy-loaded SheetJS dependency for genuine BIFF8 XLS downloads. Preserved the Institutional births chart component below the comparison cards with its legend, tooltips, published India reference, selected State data, and dedicated CSV export.
+- Verified the production static build, TypeScript, route checks, keyboard selection, Select All/Clear, indicator changes, ascending and descending sorting, factsheet navigation, and downloaded XLS/CSV contents against the dataset. Checked responsive layouts at 375, 768, and desktop widths and light/dark mode with no page overflow. Footer source, footer styles, route files, survey datasets, and shared chart source were unchanged.
+
 - Matched the footer to the indigo header, centered the developer credit, and extended the layout to keep the footer at the bottom of short pages. Browser checks confirmed the shared color, alignment, and page edge in light and dark modes.
 - Consolidated the National, States, and Compare menus into All States at `/states`. The page starts with all 28 States and the published India reference. State search, selection, indicator filters, and sorting update the chart, table, and CSV. Each State row has one factsheet action. The old National and Compare URLs forward to All States.
 - Verified the static export, 28 State routes, 212 indicator routes, and the legacy URLs. Browser checks covered State search and selection, the India toggle, indicator and availability filters, sorting, paired chart series, CSV download, and opening the Manipur factsheet.

@@ -1,13 +1,25 @@
 'use client';
 import {useEffect,useMemo,useState} from 'react';
 import Link from 'next/link';
-import {Download,Search} from 'lucide-react';
+import {ArrowDownWideNarrow,ArrowUpWideNarrow,Download,Search} from 'lucide-react';
 import SurveyChart from './charts';
 import {indicators,states,values,format,changeText,sourceLink,type Dataset,type Indicator,type Place,type Observation} from '../lib/model';
 
 const categories=[...new Set(indicators.map(item=>item.category))];
 const allPlaces=[{name:'India',slug:'india'},...states];
 const stateKeys=states.map(state=>state.slug);
+const unionTerritories=[
+  {name:'Andaman and Nicobar Islands',slug:'andaman-and-nicobar-islands'},
+  {name:'Chandigarh',slug:'chandigarh'},
+  {name:'Dadra and Nagar Haveli and Daman and Diu',slug:'dadra-and-nagar-haveli-and-daman-and-diu'},
+  {name:'Delhi',slug:'delhi'},
+  {name:'Jammu and Kashmir',slug:'jammu-and-kashmir'},
+  {name:'Ladakh',slug:'ladakh'},
+  {name:'Lakshadweep',slug:'lakshadweep'},
+  {name:'Puducherry',slug:'puducherry'},
+];
+const selectionPlaces=[...states,...unionTerritories].sort((a,b)=>a.name.localeCompare(b.name));
+const selectionKeys=selectionPlaces.map(place=>place.slug);
 type Mode='all-states'|'state'|'rankings'|'indicators'|'indicator';
 const defaultId='institutional-births';
 function status(a:Observation|undefined,b:Observation|undefined,change:number|undefined,item:Indicator) {
@@ -23,19 +35,18 @@ function Cell({value,unit}:{value?:Observation;unit:string}){
 
 export default function Explorer({mode,place,initialId}:{mode:Mode;place?:Place;initialId?:string}){
   const [id,setId]=useState(initialId||defaultId),[category,setCategory]=useState(''),[query,setQuery]=useState('');
-  const [selected,setSelected]=useState(stateKeys),[sort,setSort]=useState('name');
-  const [stateQuery,setStateQuery]=useState(''),[includeIndia,setIncludeIndia]=useState(true);
+  const [selected,setSelected]=useState(mode==='all-states'?selectionKeys:stateKeys),[sort,setSort]=useState(mode==='all-states'?'6':'name');
+  const [exporting,setExporting]=useState(false),[exportError,setExportError]=useState('');
   const [round,setRound]=useState('6'),[availability,setAvailability]=useState(''),[direction,setDirection]=useState(''),[mapping,setMapping]=useState('');
   const [datasets,setDatasets]=useState<Record<string,Dataset>>({}),[error,setError]=useState(false);
   const visible=useMemo(()=>indicators.filter(i=>(!category||i.category===category)&&i.name.toLowerCase().includes(query.toLowerCase())&&(!mapping||i.reviewed===(mapping==='reviewed'))),[category,query,mapping]);
   const indicator=visible.find(i=>i.id===id)||visible[0];
   const allStates=mode==='all-states';
-  const matchingStates=states.filter(state=>state.name.toLowerCase().includes(stateQuery.trim().toLowerCase()));
   const keys=useMemo(()=>{
     if(place)return [place.slug];
-    if(allStates)return includeIndia?['india',...selected]:selected;
+    if(allStates)return ['india',...selected.filter(key=>stateKeys.includes(key))];
     return mode==='rankings'||mode==='indicator'?stateKeys:[];
-  },[mode,place,allStates,includeIndia,selected]);
+  },[mode,place,allStates,selected]);
   useEffect(()=>{
     let active=true;
     const needed=keys.filter(key=>!datasets[key]);
@@ -52,7 +63,6 @@ export default function Explorer({mode,place,initialId}:{mode:Mode;place?:Place;
   </div>;
   if(mode==='indicators')return <section className="panel">{filters}<p role="status" className="muted">{visible.length} indicators</p><div className="table-wrap"><table><thead><tr><th>Indicator</th><th>Category</th><th>Unit</th><th>Survey rounds</th><th>Comparison status</th></tr></thead><tbody>{visible.map(item=><tr key={item.id}><th scope="row"><Link href={'/indicators/'+item.id+'/'}>{item.name}</Link></th><td>{item.category}</td><td>{item.unit}</td><td>{[item.five&&'NFHS-5',item.six&&'NFHS-6'].filter(Boolean).join(' · ')}</td><td>{item.reviewed?'Reviewed':'Mapping pending'}</td></tr>)}</tbody></table></div></section>;
   const rows=indicator?keys
-    .filter(key=>!allStates||key==='india'||matchingStates.some(state=>state.slug===key))
     .map(key=>({key,name:allPlaces.find(p=>p.slug===key)!.name,...values(datasets[key],indicator)}))
     .filter(row=>!availability||(availability==='both'?row.five?.value!=null&&row.six?.value!=null:row.five?.value==null||row.six?.value==null))
     .filter(row=>!direction||(row.change!=null&&(direction==='equal'?row.change===0:direction==='increase'?row.change>0:row.change<0))) : [];
@@ -72,32 +82,93 @@ export default function Explorer({mode,place,initialId}:{mode:Mode;place?:Place;
   function download(){
     if(!indicator)return;
     const fields=[allStates?'Geography':'State','Indicator ID','Indicator name','Category','NFHS-5 value','NFHS-6 value','Unit','Absolute change','Comparison status','Source reference'];
-    const data=sorted.map(row=>[row.name,indicator.id,indicator.name,indicator.category,row.five?.value,row.six?.value,indicator.unit,row.change,status(row.five,row.six,row.change,indicator),[row.five,row.six].filter(Boolean).map(v=>sourceLink(v!)).join(' | ')]);
+    const data=sorted.filter(row=>!allStates||row.key!=='india').map(row=>[row.name,indicator.id,indicator.name,indicator.category,row.five?.value,row.six?.value,indicator.unit,row.change,status(row.five,row.six,row.change,indicator),[row.five,row.six].filter(Boolean).map(v=>sourceLink(v!)).join(' | ')]);
     const csv=[fields,...data].map(line=>line.map(value=>'"'+String(value??'').replaceAll('"','""')+'"').join(',')).join('\r\n');
     const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));
     const link=document.createElement('a');link.href=url;link.download='nfhs-'+indicator.id+'.csv';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
   }
-  return <>
-    {allStates&&<section className="panel">
-      <div className="filters">
-        <label className="control">Search States
-          <span className="search"><Search size={16} aria-hidden="true"/><input type="search" value={stateQuery} onChange={e=>setStateQuery(e.target.value)} placeholder="Search by State name"/></span>
-        </label>
+  if(allStates) {
+    const stateRows=[
+      ...sorted.filter(row=>row.key!=='india'),
+      ...unionTerritories.filter(place=>selected.includes(place.slug)).map(place=>({key:place.slug,name:place.name,five:undefined,six:undefined,change:undefined})),
+    ].sort((a,b)=>{
+      const left=a.six?.value;
+      const right=b.six?.value;
+      if(left==null||right==null)return Number(left==null)-Number(right==null)||a.name.localeCompare(b.name);
+      return (sort==='6-asc'?left-right:right-left)||a.name.localeCompare(b.name);
+    });
+    async function downloadXls(){
+      if(!indicator||exporting)return;
+      setExporting(true);
+      setExportError('');
+      try {
+        const XLSX=await import('xlsx');
+        const sheet=XLSX.utils.aoa_to_sheet([
+          ['State','NFHS-6','NFHS-5','Indicator','Unit','NFHS-6 source','NFHS-5 source','Factsheet'],
+          ...stateRows.map(row=>[
+            row.name,row.six?.value??'Data Not Available',row.five?.value??'Data Not Available',indicator.name,indicator.unit,
+            row.six?sourceLink(row.six):'',row.five?sourceLink(row.five):'',
+            stateKeys.includes(row.key)?new URL('/states/'+row.key+'/',window.location.origin).href:'',
+          ]),
+        ]);
+        const workbook=XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook,sheet,'State Performance');
+        XLSX.writeFile(workbook,'nfhs-'+indicator.id+'.xls',{bookType:'biff8'});
+      } catch {
+        setExportError('Could not create the XLS file. Please try again.');
+      } finally {
+        setExporting(false);
+      }
+    }
+    return <div className="all-states-dashboard">
+      <div className="state-performance-grid">
+        <section className="panel state-selection-panel" aria-labelledby="state-selection-title">
+          <h2 id="state-selection-title">Select States</h2>
+          <div className="selection-actions">
+            <button type="button" onClick={()=>setSelected(selectionKeys)}>Select All</button>
+            <button type="button" onClick={()=>setSelected([])}>Clear</button>
+          </div>
+          <p className="muted selection-count" role="status">{selected.length} of {selectionPlaces.length} selected</p>
+          <p className="muted territory-availability">UT survey data and factsheets are unavailable in this dataset.</p>
+          <div className="state-checkbox-list" role="group" aria-label="Select States and Union Territories">
+            {selectionPlaces.map(state=><label key={state.slug} className="state-checkbox" data-selected={selected.includes(state.slug)}>
+              <input type="checkbox" checked={selected.includes(state.slug)} onChange={e=>setSelected(e.target.checked?[...selected,state.slug]:selected.filter(key=>key!==state.slug))}/>
+              <span>{state.name}</span>
+            </label>)}
+          </div>
+        </section>
+        <section className="panel state-comparison-panel" aria-labelledby="state-comparison-title">
+          <h2 id="state-comparison-title">State Performance</h2>
+          <div className="performance-controls">
+            <label className="control performance-indicator">Select Indicators
+              <select value={id} onChange={e=>setId(e.target.value)}>
+                {indicators.map(item=><option key={item.id} value={item.id}>{item.name}</option>)}
+              </select>
+            </label>
+            <div className="sort-buttons" role="group" aria-label="Sort by NFHS-6 value">
+              <button type="button" aria-pressed={sort==='6'} onClick={()=>setSort('6')}><ArrowDownWideNarrow size={16} aria-hidden="true"/>High to Low</button>
+              <button type="button" aria-pressed={sort==='6-asc'} onClick={()=>setSort('6-asc')}><ArrowUpWideNarrow size={16} aria-hidden="true"/>Low to High</button>
+            </div>
+            <button className="button secondary" onClick={downloadXls} disabled={!ready||!stateRows.length||exporting}><Download size={16} aria-hidden="true"/>{exporting?'Preparing XLS…':'Download XLS'}</button>
+          </div>
+          {exportError&&<p role="alert">{exportError}</p>}
+          {error?<p role="alert">Could not load survey data.</p>:!ready?<p role="status">Loading survey data…</p>:!stateRows.length?<p role="status">Select States to compare their results.</p>:<div className="table-wrap performance-table">
+            <table>
+              <caption>{indicator?.name} · {indicator?.unit}</caption>
+              <thead><tr><th scope="col">State</th><th scope="col">NFHS-6</th><th scope="col">NFHS-5</th><th scope="col">Actions</th></tr></thead>
+              <tbody>{stateRows.map(row=><tr key={row.key}>
+                <th scope="row">{row.name}</th>
+                <td><Cell value={row.six} unit={indicator!.unit}/></td>
+                <td><Cell value={row.five} unit={indicator!.unit}/></td>
+                <td>{stateKeys.includes(row.key)?<Link className="button secondary factsheet-link" href={'/states/'+row.key+'/'} aria-label={'View factsheet for '+row.name}>View Factsheet</Link>:<span className="muted">Unavailable</span>}</td>
+              </tr>)}</tbody>
+            </table>
+          </div>}
+        </section>
       </div>
-      <p className="india-option"><label><input type="checkbox" checked={includeIndia} onChange={e=>setIncludeIndia(e.target.checked)}/> Include published India estimates</label></p>
-      <details className="all-values">
-        <summary>Choose States ({selected.length} of {states.length} selected)</summary>
-        <div className="carousel-controls state-selection">
-          <button className="button secondary" onClick={()=>setSelected(stateKeys)}>Select all States</button>
-          <button className="button secondary" onClick={()=>setSelected([])}>Clear States</button>
-        </div>
-        <div className="check-grid">{matchingStates.map(state=><label key={state.slug}>
-          <input type="checkbox" checked={selected.includes(state.slug)} onChange={e=>setSelected(e.target.checked?[...selected,state.slug]:selected.filter(key=>key!==state.slug))}/>
-          {state.name}
-        </label>)}</div>
-      </details>
-      {!matchingStates.length&&<p role="status">No States match your search.</p>}
-    </section>}
+    </div>;
+  }
+  return <>
     <section className="panel explorer">
     {mode!=='indicator'&&filters}
     {mode!=='indicator'&&<label className="control select-main">Indicator<select value={indicator?.id||''} onChange={e=>setId(e.target.value)} disabled={!visible.length}>{!visible.length&&<option value="">No indicators match</option>}{visible.map(i=><option key={i.id} value={i.id}>{i.name}</option>)}</select></label>}

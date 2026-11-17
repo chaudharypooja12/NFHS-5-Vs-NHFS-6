@@ -7,7 +7,7 @@ The PRD selects Option B. Use a light background, white cards, blue and indigo a
 | Surface | Layout and interactions |
 | --- | --- |
 | Homepage | Header, hero and survey context, featured national indicators, interactive India map, searchable State selector, featured comparisons, categories, methodology and sources, footer |
-| All States | Search and selection for all 28 States, optional published India estimates, a common indicator selector, grouped bars, and a sortable table with change, availability, CSV export, and one factsheet action per State |
+| All States | Two columns with a scrollable State/UT checkbox panel and a performance card containing one indicator dropdown, NFHS-6 sorting buttons, four-column table, factsheet buttons, and XLS export. The cards stack on mobile. |
 | State factsheets | Each factsheet shows the State name under the State factsheet label, with an All States link, survey availability, filters, an indicator dropdown, metrics, grouped bars, a comparison table, and sources. |
 | Rankings | Indicator and ranking mode, round label, included count, sort controls, horizontal bars |
 | Indicators | Search and category browsing, definitions, units, survey availability, comparison status, detail pages and sources |

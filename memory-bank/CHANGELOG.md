@@ -52,3 +52,5 @@
 ## 17 November 2026 · Themed page scrollbar
 
 - Added a slim vertical page scrollbar using the active theme palette. Verified the light and dark colors in the browser, and passed the static build and route checks.
+
+- Corrected browser scrollbar styling so the preview renders a 10 px themed gutter instead of the browser's 15 px default.

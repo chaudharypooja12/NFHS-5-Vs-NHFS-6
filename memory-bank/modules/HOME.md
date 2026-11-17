@@ -14,3 +14,5 @@ The Key highlights carousel displays six square indicator illustrations with acc
 The homepage uses the available viewport width with responsive side padding. Key highlights shows four cards at desktop widths, three at tablet widths, and a vertical carousel on mobile. Coverage cards and State exploration panels stack on mobile.
 
 The map legend shows the lowest and highest published State values for the selected indicator in its survey unit.
+
+The map panel places the State selection instructions between the indicator dropdown and the map. The compact State directory uses the same themed scrollbar as the page.

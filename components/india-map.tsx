@@ -2,6 +2,7 @@
 import {useEffect,useState} from 'react';
 import {geoMercator,geoPath} from 'd3-geo';
 import type {FeatureCollection,Geometry} from 'geojson';
+import {MousePointerClick} from 'lucide-react';
 import {states,indicators,values,format,type Dataset} from '../lib/model';
 
 type MapData=FeatureCollection<Geometry,{NAME_1?:string;name?:string;st_nm?:string;shapeName?:string}>;
@@ -24,6 +25,10 @@ export default function IndiaMap(){
   const path=map?geoPath(geoMercator().fitExtent([[12,8],[488,370]],map)):null;
   return <div className="map-wrap">
     <label className="control">Map indicator<select value={id} onChange={e=>setId(e.target.value)}>{indicators.filter(item=>item.reviewed&&item.six).map(item=><option key={item.id} value={item.id}>{item.name}</option>)}</select></label>
+    <div className="map-instruction">
+      <h3><MousePointerClick size={19} aria-hidden="true"/> Select a State on the Map</h3>
+      <p>Click any state to view its detailed indicators.</p>
+    </div>
     {error?<p role="status">Map unavailable. Use the State directory.</p>:!map?<p role="status">Loading State map…</p>:<svg className="india-map" viewBox="0 0 500 378" aria-label="Interactive India State map">
     {map.features.map((feature,index)=>{
       const title=name(feature),state=states.find(s=>s.name.toLowerCase()===title.toLowerCase()),value=state?lookup.get(state.name):undefined;

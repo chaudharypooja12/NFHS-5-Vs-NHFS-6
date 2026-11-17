@@ -13,23 +13,24 @@
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation-duration:0s!important;transition-duration:0s!important}}
 
 @media (forced-colors:none){
-  html{
+  :root,.state-list{
     --page-scroll-thumb:color-mix(in srgb,var(--accent) 72%,var(--muted));
     --page-scroll-track:var(--bg);
     scrollbar-width:thin;
     scrollbar-color:var(--page-scroll-thumb) var(--page-scroll-track);
   }
   body{scrollbar-color:auto}
+  .state-list{scroll-behavior:smooth}
 
   @supports not (scrollbar-color: auto){
-    html::-webkit-scrollbar{width:10px}
-    html::-webkit-scrollbar-track{background:var(--page-scroll-track)}
-    html::-webkit-scrollbar-thumb{
+    :is(html,.state-list)::-webkit-scrollbar{width:10px}
+    :is(html,.state-list)::-webkit-scrollbar-track{background:var(--page-scroll-track)}
+    :is(html,.state-list)::-webkit-scrollbar-thumb{
       background:var(--page-scroll-thumb);
       border:2px solid var(--page-scroll-track);
       border-radius:999px;
     }
-    html::-webkit-scrollbar-thumb:hover{background:var(--accent)}
+    :is(html,.state-list)::-webkit-scrollbar-thumb:hover{background:var(--accent)}
   }
 }
 
@@ -58,6 +59,17 @@
 #explore .map-grid>.panel:last-child{background:#e4f5f1;border-color:#acd9d0}
 [data-theme=dark] #explore .map-grid>.panel:first-child{background:#29264d;border-color:#544e87}
 [data-theme=dark] #explore .map-grid>.panel:last-child{background:#193a37;border-color:#3c6e65}
+.map-instruction{
+  margin-block:12px 8px;
+  padding:12px 14px;
+  border:1px solid color-mix(in srgb,var(--accent) 24%,var(--border));
+  border-radius:12px;
+  text-align:center;
+  background:linear-gradient(120deg,var(--surface),color-mix(in srgb,var(--accent) 13%,var(--surface)));
+}
+.map-instruction h3{display:flex;align-items:center;justify-content:center;gap:8px;color:var(--accent);font-weight:750}
+.map-instruction svg{flex:none}
+.map-instruction p{margin-top:3px;color:var(--muted);font-size:13px}
 @media(max-width:850px){.highlight-track{grid-auto-columns:calc((100% - 28px)/3)}}
 @media(max-width:600px){
   .reference-home section[aria-labelledby="highlights"]{container-type:inline-size}

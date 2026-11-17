@@ -32,7 +32,7 @@ export default function IndiaMap(){
       <h3><MousePointerClick size={19} aria-hidden="true"/> Select a State on the Map</h3>
       <p>Click any state to view its detailed indicators.</p>
     </div>
-    {error?<p role="status">Map unavailable. Use the State directory.</p>:!map?<p role="status">Loading State map…</p>:<svg className="india-map" viewBox={`0 0 ${mapWidth} ${mapHeight}`} aria-label="Interactive India State map">
+    {error?<p role="status">Map unavailable. Use the State search.</p>:!map?<p role="status">Loading State map…</p>:<svg className="india-map" viewBox={`0 0 ${mapWidth} ${mapHeight}`} aria-label="Interactive India State map">
     {map.features.map((feature,index)=>{
       const title=name(feature),state=states.find(s=>s.name.toLowerCase()===title.toLowerCase()),value=state?lookup.get(state.name):undefined;
       const color=!state?'#e2e6ef':value==null?'#cdd0dc':colors[Math.min(4,Math.floor((max===min ? 0.5 :(value-min)/(max-min))*5))];

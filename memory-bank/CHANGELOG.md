@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-11-17
+
+- Matched the footer to the indigo header, centered the developer credit, and extended the layout to keep the footer at the bottom of short pages. Browser checks confirmed the shared color, alignment, and page edge in light and dark modes.
+- Consolidated the National, States, and Compare menus into All States at `/states`. The page starts with all 28 States and the published India reference. State search, selection, indicator filters, and sorting update the chart, table, and CSV. Each State row has one factsheet action. The old National and Compare URLs forward to All States.
+- Verified the static export, 28 State routes, 212 indicator routes, and the legacy URLs. Browser checks covered State search and selection, the India toggle, indicator and availability filters, sorting, paired chart series, CSV download, and opening the Manipur factsheet.
+
 ## 2026-11-14
 
 - Renamed the shared header, footer, and page titles to NFHS India. Verified the static build and route checks.

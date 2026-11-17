@@ -24,8 +24,8 @@ export default function Home(){
  <div><span>NFHS-6 published indicators</span><strong>{indicators.filter(i=>i.six).length}</strong></div>
  <div><span>Survey rounds</span><strong>2</strong><small>NFHS-5 (2019–21) and NFHS-6 (2023–24)</small></div>
  </section>
- <section id="explore" className="map-section"><div className="section-title"><h2>Performance across States</h2><Link className="text-link" href="/states/">State directory <ArrowRight size={16}/></Link></div>
+ <section id="explore" className="map-section"><div className="section-title"><h2>Performance across States</h2><Link className="text-link" href="/states/">All States <ArrowRight size={16}/></Link></div>
  <div className="map-grid"><section className="panel"><IndiaMap/></section><section className="panel"><h3 className="find-title"><MapPin size={19}/> Find a State</h3><StateDirectory compact/></section></div></section>
- <section className="panel home-actions"><div><h2>NFHS-6 vs NFHS-5</h2><p className="muted">Review official India totals or compare selected States.</p></div><Link className="button secondary" href="/dashboard/">National dashboard</Link><Link className="button secondary" href="/compare/">Compare States <ArrowRight size={16}/></Link></section>
+ <section className="panel home-actions"><div><h2>NFHS-6 vs NFHS-5</h2><p className="muted">Review official India totals or compare selected States.</p></div><Link className="button secondary" href="/states/">All States <ArrowRight size={16}/></Link></section>
  </div>;
 }

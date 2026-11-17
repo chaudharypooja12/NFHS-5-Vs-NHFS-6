@@ -7,8 +7,8 @@
   - [ ] Configure App Router, TypeScript, Tailwind CSS, shadcn/ui, Recharts, and Lucide React.
   - [x] Add shared layout, navigation, footer, and development and build instructions.
 - [x] Implement the [dashboard menu routes](../modules/INDEX.md).
-  - [x] Build Home, National Dashboard, State Directory, and static State detail routes.
-  - [x] Build Compare, Rankings, Indicator Explorer and details, Methodology, and Sources.
+  - [x] Build Home, All States with India and multi-State comparisons, and static State factsheet routes.
+  - [x] Build Rankings, Indicator Explorer and details, Methodology, and Sources.
 - [ ] Implement shared controls and visualizations.
   - [x] Build the interactive map, State search alternative, focus behavior, and data legend.
   - [x] Build grouped bars, ranking bars, tables, filters, and indicator search.

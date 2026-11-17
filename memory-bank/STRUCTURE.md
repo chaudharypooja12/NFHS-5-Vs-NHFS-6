@@ -46,11 +46,11 @@ Application sources are in app, components, lib, and scripts. The data build rea
 app/
 ├── layout.tsx
 ├── page.tsx
-├── dashboard/page.tsx
+├── dashboard/page.tsx   # Old National URL forwards to All States
 ├── states/
-│   ├── page.tsx
+│   ├── page.tsx        # All States
 │   └── [slug]/page.tsx
-├── compare/page.tsx
+├── compare/page.tsx     # Old Compare URL forwards to All States
 ├── rankings/page.tsx
 ├── indicators/
 │   ├── page.tsx

@@ -731,10 +731,9 @@ Use readable, search-friendly URLs.
 | Route | Page |
 |---|---|
 | `/` | Homepage |
-| `/dashboard` | National Dashboard |
-| `/states` | State Directory |
+| `/states` | All States, including the India reference and multi-State comparison |
 | `/states/[slug]` | State Dashboard |
-| `/compare` | Multi-State Comparison |
+| `/dashboard`, `/compare` | Forward to All States |
 | `/rankings` | State Rankings |
 | `/indicators` | Indicator Explorer |
 | `/indicators/[slug]` | Indicator Detail |

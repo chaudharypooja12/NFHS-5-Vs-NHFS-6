@@ -1,10 +1,11 @@
 # National Dashboard
 
-**Route** `/dashboard`  
+**Route** [All States](STATES.md) at `/states`
+
 **Requirements** FR-02  
 **Status** Implemented in the local build
 
-Use published India totals and cite the official fact sheets. Show paired values, change where verified, interpretation, and grouped bars. Verify national coverage and source labels.
+All States includes the published India estimates by default. Users can hide the India reference using the checkbox and follow the reported values to their official fact sheets. The old `/dashboard` route forwards to All States.
 
 - [Dashboard menu index](INDEX.md)
 - [NFHS Data](../NFHS-DATA.md)

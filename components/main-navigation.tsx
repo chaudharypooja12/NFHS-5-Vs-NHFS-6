@@ -8,9 +8,7 @@ import ThemeToggle from './theme-toggle';
 
 const links = [
   ['Overview', '/'],
-  ['National', '/dashboard/'],
-  ['States', '/states/'],
-  ['Compare', '/compare/'],
+  ['All States', '/states/'],
   ['Rankings', '/rankings/'],
   ['Indicators', '/indicators/'],
   ['Reports', '/reports/'],

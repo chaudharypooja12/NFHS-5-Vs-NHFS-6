@@ -33,3 +33,5 @@ The main navigation uses a light-blue pill to mark the current page or parent se
 The header, page content, and footer use the same full-width shell with responsive side gutters. The narrow-screen navigation wraps its links and retains the active route indicator.
 
 Below 1024 px, the header uses a disclosure button to show the same navigation links in a dropdown. The route-aware highlight is shared across viewport sizes.
+
+The page scrollbar follows the active theme and uses the browser's default styling in forced-color mode.

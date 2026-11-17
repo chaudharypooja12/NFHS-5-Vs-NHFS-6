@@ -48,3 +48,7 @@
 
 - Added a compact mobile navigation dropdown and published-value endpoints to the map legend.
 - TypeScript, production build, and route checks passed. Verified mobile navigation at seven widths and checked the legend with percentage and fertility indicators.
+
+## 17 November 2026 · Themed page scrollbar
+
+- Added a slim vertical page scrollbar using the active theme palette. Verified the light and dark colors in the browser, and passed the static build and route checks.

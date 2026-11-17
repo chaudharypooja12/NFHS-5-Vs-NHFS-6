@@ -12,6 +12,28 @@
 @media(max-width:600px){.hero-content,.map-grid{grid-template-columns:1fr}.hero-content{padding:36px 0}.hero-card{max-width:none}.hero h1{font-size:52px}.featured{grid-template-columns:1fr;gap:9px}.card,.panel{padding:15px}.section-title{align-items:start}.section-title .text-link{font-size:12px}.state-grid,.check-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.state-grid a,.check-grid label{overflow-wrap:anywhere}.metrics{grid-template-columns:1fr}.footer a:first-of-type{margin-left:0}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation-duration:0s!important;transition-duration:0s!important}}
 
+@media (forced-colors:none){
+  html{
+    --page-scroll-thumb:color-mix(in srgb,var(--accent) 72%,var(--muted));
+    --page-scroll-track:var(--bg);
+    scrollbar-width:thin;
+    scrollbar-color:var(--page-scroll-thumb) var(--page-scroll-track);
+  }
+  body{scrollbar-color:auto}
+
+  @supports selector(::-webkit-scrollbar){
+    html{scrollbar-width:auto;scrollbar-color:auto}
+    html::-webkit-scrollbar:vertical{width:10px}
+    html::-webkit-scrollbar-track:vertical{background:var(--page-scroll-track)}
+    html::-webkit-scrollbar-thumb:vertical{
+      background:var(--page-scroll-thumb);
+      border:2px solid var(--page-scroll-track);
+      border-radius:999px;
+    }
+    html::-webkit-scrollbar-thumb:vertical:hover{background:var(--accent)}
+  }
+}
+
 /* Reference-inspired overview */
 .header{background:#393991;color:#fff;border-color:transparent}.nav nav,.nav-source{color:#fff}.nav a:hover{color:#e4e0ff}.brand span{background:white;color:#393991}.theme-toggle,.carousel-controls button{display:inline-grid;place-items:center;min-height:36px;min-width:36px;border-radius:9px}.theme-toggle{color:inherit;border:1px solid #ffffff50;background:transparent}.theme-toggle:hover{background:#ffffff20}.carousel-controls{display:flex;gap:7px;align-items:center}.carousel-controls button{border:1px solid var(--border)}.carousel-controls button:hover{border-color:var(--accent)}
 .reference-home{display:grid;gap:clamp(24px,2.5vw,40px);padding-block:clamp(28px,3vw,48px)}.reference-home>section{min-width:0}.reference-home .section-title{align-items:center;flex-wrap:wrap}.reference-home :is(.coverage,.map-section,.home-actions){margin-top:0}.reference-intro h1{font-size:clamp(35px,5vw,65px);line-height:1.08;letter-spacing:-.055em;margin-bottom:12px}.reference-intro>p:last-child{font-size:17px;color:var(--muted)}

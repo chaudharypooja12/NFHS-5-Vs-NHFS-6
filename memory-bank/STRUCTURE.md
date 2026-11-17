@@ -51,7 +51,7 @@ app/
 │   ├── page.tsx        # All States
 │   └── [slug]/page.tsx
 ├── compare/page.tsx     # Old Compare URL forwards to All States
-├── rankings/page.tsx
+├── rankings/page.tsx    # Legacy Rankings URL forwards to All States
 ├── indicators/
 │   ├── page.tsx
 │   └── [slug]/page.tsx
@@ -77,6 +77,7 @@ lib/
 ├── validation/
 └── formatting/
 scripts/
+├── check-ranking.mjs   # Direction, ties, eligibility, zero/missing and real-data checks
 ├── extract/
 ├── transform/
 └── validate/

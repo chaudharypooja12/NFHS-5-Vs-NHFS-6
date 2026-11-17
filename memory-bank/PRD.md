@@ -736,7 +736,7 @@ Use readable, search-friendly URLs.
 | `/states` | All States, including the India reference and multi-State comparison |
 | `/states/[slug]` | State Dashboard |
 | `/dashboard`, `/compare` | Forward to All States |
-| `/rankings` | State Rankings |
+| `/rankings` | Legacy URL forwards to All States, which includes State rankings |
 | `/indicators` | Indicator Explorer |
 | `/indicators/[slug]` | Indicator Detail |
 | `/methodology` | Methodology |

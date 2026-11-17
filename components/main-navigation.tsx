@@ -9,7 +9,6 @@ import ThemeToggle from './theme-toggle';
 const links = [
   ['Overview', '/'],
   ['All States', '/states/'],
-  ['Rankings', '/rankings/'],
   ['Indicators', '/indicators/'],
   ['Reports', '/reports/'],
 ];

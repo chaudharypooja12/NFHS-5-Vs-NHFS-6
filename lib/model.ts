@@ -13,10 +13,10 @@ export function values(data:Dataset|undefined, indicator:Indicator) {
   };
 }
 export function format(value:number|null|undefined,unit:string) {
-  return value == null ? '—' : value.toLocaleString('en-IN',{maximumFractionDigits:3}) + (unit==='%'?'%':'');
+  return value == null ? 'N/A' : value.toLocaleString('en-IN',{maximumFractionDigits:3}) + (unit==='%'?'%':'');
 }
 export function changeText(value:number|undefined,unit:string) {
-  return value == null ? '—' : (value>0?'+':'') + value + (unit==='%'?' pp':' '+unit);
+  return value == null ? 'N/A' : (value>0?'+':'') + value + (unit==='%'?' pp':' '+unit);
 }
 export function sourceLink(value:Observation) {
   return sources[value.sourceId] + (value.page ? '#page='+value.page : '');

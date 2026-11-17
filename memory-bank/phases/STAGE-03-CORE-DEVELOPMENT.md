@@ -8,7 +8,7 @@
   - [x] Add shared layout, navigation, footer, and development and build instructions.
 - [x] Implement the [dashboard menu routes](../modules/INDEX.md).
   - [x] Build Home, All States with India and multi-State comparisons, and static State factsheet routes.
-  - [x] Build Rankings, Indicator Explorer and details, Methodology, and Sources.
+  - [x] Integrate Rankings into All States, retain legacy forwarding, and build Indicator Explorer and details, Methodology, and Sources.
 - [ ] Implement shared controls and visualizations.
   - [x] Build the interactive map, State search alternative, focus behavior, and data legend.
   - [x] Build grouped bars, ranking bars, tables, filters, and indicator search.

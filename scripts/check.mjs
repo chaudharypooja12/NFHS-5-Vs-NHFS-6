@@ -24,8 +24,8 @@ assert.match(allStates, /Low to High/);
 assert.doesNotMatch(allStates, /institutional-births-chart|View Institutional births data/);
 assert.match(allStates, /36<!-- --> of <!-- -->36<!-- --> selected/);
 assert.match(allStates, /Download XLS/);
-assert.doesNotMatch(allStates, /Search States|Search indicators|Comparison status|Data availability|Observed change/);
-for(const route of ['dashboard','compare']) {
+assert.doesNotMatch(allStates, /Search States|Search indicators|Data availability|Observed change/);
+for(const route of ['dashboard','compare','rankings']) {
   const page=readFileSync('out/'+route+'/index.html','utf8');
   assert.match(page, /<meta http-equiv="refresh" content="0;url=\/states\/"\s*\/?\s*>/i, route+' must forward to All States');
 }

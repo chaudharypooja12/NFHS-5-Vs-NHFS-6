@@ -2,6 +2,10 @@
 
 ## 2026-11-17
 
+- Consolidated Rankings into the All States table with NFHS-6, NFHS-5, and eligible-change rank modes, direction-aware ranks, ties, comparison status, and validated change columns. Reused State selection, indicator selection, sorting, factsheet actions, and XLS export. Removed the standalone rankings mode and unused ranking chart branches. The old Rankings URL forwards to All States and its menu entry is removed.
+- Added clear empty-result messages and reset actions. Missing survey values display N/A. Original datasets, Overview and Reports sources, header/footer styles, branding, disclaimer, and external links were unchanged.
+- Verified production build and TypeScript, static route checks, ranking regression checks, real-data direction/eligibility, XLS contents, selection persistence, ranking modes, context labels, legacy forwarding, 212 catalog indicators and reset behavior, Overview highlights/search, Reports, desktop/tablet/mobile layouts, and browser error logs. No lint script or lint configuration is present in the project.
+
 - Grouped the Indicator Explorer's 212 indicators into 12 expandable category sections with themed icons and counts. Retained existing columns, detail links, and category/search/comparison-status filters. Filtered counts show matches against each category total.
 - Verified the static build and route checks, all 212 unique indicator links, keyboard collapse/expand, combined filters, empty results, and restoration of all indicators. Checked light/dark presentation and mobile page overflow.
 

@@ -6,6 +6,9 @@ import {MousePointerClick} from 'lucide-react';
 import {states,indicators,values,format,type Dataset} from '../lib/model';
 
 type MapData=FeatureCollection<Geometry,{NAME_1?:string;name?:string;st_nm?:string;shapeName?:string}>;
+const mapWidth=370;
+const mapHeight=378;
+const mapPadding=8;
 export default function IndiaMap(){
   const [map,setMap]=useState<MapData>(),[data,setData]=useState<Dataset[]>([]),[hover,setHover]=useState(''),[id,setId]=useState('institutional-births'),[error,setError]=useState(false);
   const indicator=indicators.find(item=>item.id===id)!;
@@ -22,14 +25,14 @@ export default function IndiaMap(){
     const original=feature.properties.NAME_1 || feature.properties.name || feature.properties.st_nm || feature.properties.shapeName || '';
     return ({Orissa:'Odisha',Uttaranchal:'Uttarakhand','NCT of Delhi':'Delhi'} as Record<string,string>)[original] || original.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
   };
-  const path=map?geoPath(geoMercator().fitExtent([[12,8],[488,370]],map)):null;
+  const path=map?geoPath(geoMercator().fitExtent([[mapPadding,mapPadding],[mapWidth-mapPadding,mapHeight-mapPadding]],map)):null;
   return <div className="map-wrap">
     <label className="control">Map indicator<select value={id} onChange={e=>setId(e.target.value)}>{indicators.filter(item=>item.reviewed&&item.six).map(item=><option key={item.id} value={item.id}>{item.name}</option>)}</select></label>
     <div className="map-instruction">
       <h3><MousePointerClick size={19} aria-hidden="true"/> Select a State on the Map</h3>
       <p>Click any state to view its detailed indicators.</p>
     </div>
-    {error?<p role="status">Map unavailable. Use the State directory.</p>:!map?<p role="status">Loading State map…</p>:<svg className="india-map" viewBox="0 0 500 378" aria-label="Interactive India State map">
+    {error?<p role="status">Map unavailable. Use the State directory.</p>:!map?<p role="status">Loading State map…</p>:<svg className="india-map" viewBox={`0 0 ${mapWidth} ${mapHeight}`} aria-label="Interactive India State map">
     {map.features.map((feature,index)=>{
       const title=name(feature),state=states.find(s=>s.name.toLowerCase()===title.toLowerCase()),value=state?lookup.get(state.name):undefined;
       const color=!state?'#e2e6ef':value==null?'#cdd0dc':colors[Math.min(4,Math.floor((max===min ? 0.5 :(value-min)/(max-min))*5))];

@@ -70,6 +70,7 @@
 .map-instruction h3{display:flex;align-items:center;justify-content:center;gap:8px;color:var(--accent);font-weight:750}
 .map-instruction svg{flex:none}
 .map-instruction p{margin-top:3px;color:var(--muted);font-size:13px}
+#explore .india-map{width:min(100%,515px);height:auto;max-height:none;margin-inline:auto}
 @media(max-width:850px){.highlight-track{grid-auto-columns:calc((100% - 28px)/3)}}
 @media(max-width:600px){
   .reference-home section[aria-labelledby="highlights"]{container-type:inline-size}

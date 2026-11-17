@@ -59,3 +59,8 @@
 
 - Moved State selection guidance into the map panel and applied the themed scrollbar to the State list.
 - Verified the production build, banner placement and fit at mobile width, and both light and dark styles in the local preview.
+
+## 17 November 2026 · Choropleth sizing
+
+- Enlarged the homepage map by about 35 percent while preserving its proportions and controls.
+- The production build and route checks passed. Verified centering, all 28 State links, and no horizontal overflow at six viewport widths from 320 to 1440 px.

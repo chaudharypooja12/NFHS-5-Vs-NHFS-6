@@ -39,7 +39,7 @@ function status(a:Observation|undefined,b:Observation|undefined,change:number|un
 export default function Explorer({mode,place,initialId}:{mode:Mode;place?:Place;initialId?:string}){
   const [id,setId]=useState(initialId||defaultId),[category,setCategory]=useState(''),[query,setQuery]=useState('');
   const [sort,setSort]=useState('name');
-  const [availability,setAvailability]=useState(''),[direction,setDirection]=useState(''),[mapping,setMapping]=useState('');
+  const [mapping,setMapping]=useState('');
   const [datasets,setDatasets]=useState<Record<string,Dataset>>({}),[error,setError]=useState(false);
   const [collapsedCategories,setCollapsedCategories]=useState<string[]>([]);
   const visible=useMemo(()=>indicators.filter(i=>(!category||i.category===category)&&i.name.toLowerCase().includes(query.toLowerCase())&&(!mapping||i.reviewed===(mapping==='reviewed'))),[category,query,mapping]);
@@ -101,8 +101,7 @@ export default function Explorer({mode,place,initialId}:{mode:Mode;place?:Place;
   </section>;
   const rows=indicator?keys
     .map(key=>({key,name:allPlaces.find(p=>p.slug===key)!.name,...values(datasets[key],indicator)}))
-    .filter(row=>!availability||(availability==='both'?row.five?.value!=null&&row.six?.value!=null:row.five?.value==null||row.six?.value==null))
-    .filter(row=>!direction||(row.change!=null&&(direction==='equal'?row.change===0:direction==='increase'?row.change>0:row.change<0))) : [];
+ : [];
   const sorted=rows.sort((a,b)=>{
     if(sort==='change')return (b.change??-Infinity)-(a.change??-Infinity)||a.name.localeCompare(b.name);
     if(sort==='5'||sort==='6'||sort==='6-asc'){const field=sort==='5'?'five':'six';const left=a[field]?.value;const right=b[field]?.value;if(left==null||right==null)return Number(left==null)-Number(right==null)||a.name.localeCompare(b.name);return (sort==='6-asc'?left-right:right-left)||a.name.localeCompare(b.name);}
@@ -121,15 +120,11 @@ export default function Explorer({mode,place,initialId}:{mode:Mode;place?:Place;
     {mode!=='indicator'&&<label className="control select-main">Indicator<select value={indicator?.id||''} onChange={e=>setId(e.target.value)} disabled={!visible.length}>{!visible.length&&<option value="">No matching indicators found.</option>}{visible.map(i=><option key={i.id} value={i.id}>{i.name}</option>)}</select></label>}
     {!indicator&&<div className="notice"><p role="status">No matching indicators found.</p><button className="button secondary" onClick={()=>{setCategory('');setQuery('');setMapping('');}}>Reset filters</button></div>}
     {indicator&&<>
-      {mode!=='indicator'&&<div className="controls-row">
-      {keys.length>1&&<label className="control">Sort<select value={sort} onChange={e=>setSort(e.target.value)}><option value="name">State name</option><option value="5">NFHS-5 value</option><option value="6">NFHS-6 value · high to low</option><option value="6-asc">NFHS-6 value · low to high</option><option value="change">Absolute change</option></select></label>}
-      <label className="control">Data availability<select value={availability} onChange={e=>setAvailability(e.target.value)}><option value="">All values</option><option value="both">Both rounds</option><option value="missing">Missing a round</option></select></label>
-      <label className="control">Observed change<select value={direction} onChange={e=>setDirection(e.target.value)}><option value="">All changes</option><option value="increase">Increased</option><option value="decrease">Decreased</option><option value="equal">Unchanged</option></select></label>
-      </div>}
+
       <div className="section-title"><div><h2><HeadingIcon name="chart"/>{indicator.name}</h2>{mode!=='indicator'&&<p className="muted">{indicator.category} · {indicator.unit} · {indicator.reviewed?'Reviewed mapping':'Mapping pending'}</p>}</div><div className="state-actions">{mode==='indicator'&&<><button className="button secondary" aria-pressed={sort==='6'} onClick={()=>setSort('6')}>High to Low</button><button className="button secondary" aria-pressed={sort==='6-asc'} onClick={()=>setSort('6-asc')}>Low to High</button>{sort!=='name'&&<button className="button secondary" onClick={()=>setSort('name')}>Clear filters</button>}</>}<button className="button download-button" onClick={download} disabled={!ready||!sorted.length}><Download size={16}/> CSV</button></div></div>
       {!indicator.reviewed&&<p className="notice">This measure is listed under its source survey round while the cross-round mapping is reviewed.</p>}
       {place?.slug==='manipur'&&<p className="notice">NFHS-6 data is unavailable for Manipur. Published NFHS-5 results are available below.</p>}
-      {error?<p role="alert">Could not load survey data.</p>:!ready?<p role="status">Loading survey data…</p>:!sorted.length?<div className="notice"><p role="status">No eligible observations for this selection.</p><button className="button secondary" onClick={()=>{setAvailability('');setDirection('');setCategory('');setQuery('');setMapping('');}}>Reset filters</button></div>:<>
+      {error?<p role="alert">Could not load survey data.</p>:!ready?<p role="status">Loading survey data…</p>:!sorted.length?<div className="notice"><p role="status">No eligible observations for this selection.</p><button className="button secondary" onClick={()=>{setCategory('');setQuery('');setMapping('');}}>Reset filters</button></div>:<>
         {place&&sorted[0]&&<div className="metrics">{[['NFHS-5',format(sorted[0].five?.value,indicator.unit)],['NFHS-6',format(sorted[0].six?.value,indicator.unit)],['Observed change',changeText(sorted[0].change,indicator.unit)]].map(([label,value])=><div key={label}><span>{label}</span><strong>{value}</strong></div>)}</div>}
         {mode!=='indicator'&&<SurveyChart rows={sorted.slice(0,8).map(row=>({name:row.name,five:row.five?.value,six:row.six?.value}))}/>}
         {sorted.length>8&&mode!=='indicator'&&<p className="muted">The chart shows the first 8 States. The table includes all results.</p>}

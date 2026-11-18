@@ -3,9 +3,9 @@ import {categoryStyle} from '../lib/category-style';
 
 import {Fragment, useEffect, useState} from 'react';
 import {Download} from 'lucide-react';
-import {downloadCsv} from '../lib/download';
+
 import {changeText, type Dataset, type Place} from '../lib/model';
-import {coverageNote, factSheetRows, loadStateDataset, manipurNotice, observationStatus, rowSources, sampleLabels, stateSample, surveyNotes} from '../lib/state-fact-sheet';
+import {coverageNote, factSheetRows, loadStateDataset, manipurNotice, sampleLabels, stateSample} from '../lib/state-fact-sheet';
 import IndiaMap from './india-map';
 import ObservationCell from './observation-cell';
 
@@ -28,22 +28,21 @@ export default function StateFactSheet({place}: {place: Place}) {
   const currentData = data?.slug === place.slug ? data : undefined;
   const sample = stateSample(place.slug);
   const rows = currentData ? factSheetRows(currentData) : [];
-  function csv() {
-    downloadCsv([
-      ['Indicator Number', 'Category', 'Indicator', 'NFHS-6', 'NFHS-5', 'NFHS-6 Status', 'NFHS-5 Status', 'Source Page'],
-      ...rows.map(row => [
-        row.indicator.six ?? row.indicator.five,
-        row.indicator.category,
-        row.indicator.name,
-        row.six?.value,
-        row.five?.value,
-        observationStatus(row.six),
-        observationStatus(row.five, row.historical),
-        rowSources(row).map(source => source.label + ' row ' + source.number + ' ' + source.url).join(' | '),
-      ]),
-    ], 'nfhs-' + place.slug + '-fact-sheet.csv');
+  const [xlsxBusy, setXlsxBusy] = useState(false);
+  const [xlsxError, setXlsxError] = useState(false);
+  async function xlsx() {
+    if (!currentData) return;
+    setXlsxBusy(true);
+    setXlsxError(false);
+    try {
+      const {downloadFactSheetWorkbook} = await import('../lib/state-workbook');
+      await downloadFactSheetWorkbook(currentData);
+    } catch {
+      setXlsxError(true);
+    } finally {
+      setXlsxBusy(false);
+    }
   }
-
   async function pdf() {
     if (!currentData) return;
     setExporting(true);
@@ -60,9 +59,10 @@ export default function StateFactSheet({place}: {place: Place}) {
 
   return <>
     <div className="state-actions fact-downloads">
-      <button className="button download-button" disabled={!currentData} onClick={csv}><Download size={16}/> Download CSV</button>
+      <button className="button download-button" disabled={!currentData || xlsxBusy} onClick={xlsx}><Download size={16}/> {xlsxBusy ? 'Preparing XLSX…' : 'Download XLSX'}</button>
       <button className="button download-button" disabled={!currentData || exporting} onClick={pdf}><Download size={16}/> {exporting ? 'Preparing PDF…' : 'Download PDF'}</button>
     </div>
+    {xlsxError && <p role="alert">Could not generate the workbook. Try Download XLSX again.</p>}
     {pdfError && <p role="alert">Could not generate the PDF. Try Download PDF again.</p>}
     <section className="panel fact-overview" aria-label="State overview">
       <IndiaMap selectedState={place.name}/>
@@ -96,11 +96,7 @@ export default function StateFactSheet({place}: {place: Place}) {
             })}</tbody>
           </table>
         </div>}
-      <details className="all-values">
-        <summary>NFHS-6 indicator notes</summary>
-        <ol className="fact-notes">{surveyNotes.filter(([number]) => number !== '+').map(([number, note]) => <li key={number} value={Number(number)}>{note}</li>)}</ol>
-        <p>{surveyNotes.find(([number]) => number === '+')?.[1]}</p>
-      </details>
+
     </section>
   </>;
 }

@@ -2,6 +2,8 @@
 
 ## 2026-11-19
 
+- Replaced complete State CSV download with four-column XLSX. Removed on-page NFHS-6 notes and availability/change filters. Verified build and routes plus the 212-row Mizoram workbook, source values and removals in Edge. Percentage changes retain the validated percentage-point calculation.
+
 - Removed the Category column from Indicators and Rank column from All States. Reduced map label size and weight. Verified static build, route and ranking checks, and Edge table structure and label styling.
 
 - Added carousel card borders and coverage icons. Applied shared category colors to indicator tables, State comparison groups and State fact sheets. Verified build, route and ranking checks, plus Edge card and category styling checks.

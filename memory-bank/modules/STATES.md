@@ -18,3 +18,4 @@ The default comparison order is alphabetical by State name. High to Low and Low 
 All 28 States are selected by default. Union Territories have a separate collapsed optional section. Select All selects States. The table uses one row per geography with three-column indicator groups for NFHS-6, NFHS-5 and change. The rank column follows the sort indicator.
 State comparison indicator groups and fact-sheet categories use the shared category palette.
 The comparison table starts with State and shows indicator groups and Actions.
+The complete fact-sheet export is XLSX with Indicator, NFHS-6, NFHS-5 and % Change columns. Values retain published units and validated changes use pp for percentages. The on-page notes and availability/change dropdowns are removed.

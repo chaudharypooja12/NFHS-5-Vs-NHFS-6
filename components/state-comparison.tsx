@@ -5,7 +5,7 @@ import {Fragment, useEffect, useState} from 'react';
 import Link from 'next/link';
 import {ArrowDownWideNarrow,ArrowUpWideNarrow,Download,Eye} from 'lucide-react';
 import {changeText, states, type Dataset} from '../lib/model';
-import {rankingValue,stateRanks} from '../lib/ranking';
+import {rankingValue} from '../lib/ranking';
 import {factSheetIndicators, loadStateDataset, stateValues} from '../lib/state-fact-sheet';
 import ObservationCell from './observation-cell';
 import HeadingIcon from './heading-icon';
@@ -66,10 +66,6 @@ export default function StateComparison() {
     if (left == null || right == null) return Number(left == null) - Number(right == null) || a.name.localeCompare(b.name);
     return (sort === 'asc' ? left - right : right - left) || a.name.localeCompare(b.name);
   });
-  const ranks = new Map(chosen.map(item => [
-    item.id,
-    stateRanks(ordered.map(state => ({key: state.slug, ...stateValues(datasets[state.slug], item)})), '6', item),
-  ]));
 
   async function download() {
     setExporting(true);
@@ -147,14 +143,13 @@ export default function StateComparison() {
           <table className="state-table">
             <thead>
               <tr>
-                <th scope="col" rowSpan={2}>Rank</th><th scope="col" rowSpan={2}>State</th>
+                <th scope="col" rowSpan={2}>State</th>
                 {chosen.map(item => <th key={item.id} scope="colgroup" colSpan={3} className="indicator-group-heading category-heading" style={categoryStyle(item.category)}>{item.name}</th>)}
                 <th scope="col" rowSpan={2}>Actions</th>
               </tr>
               <tr>{chosen.map(item => <Fragment key={item.id}><th className="category-heading" style={categoryStyle(item.category)} scope="col">NFHS-6</th><th className="category-heading" style={categoryStyle(item.category)} scope="col">NFHS-5</th><th className="category-heading" style={categoryStyle(item.category)} scope="col">Change{item.unit === '%' ? ' (pp)' : ''}</th></Fragment>)}</tr>
             </thead>
             <tbody>{ordered.map(state => <tr key={state.slug}>
-              <td>{ranks.get(sortIndicator.id)?.get(state.slug) ?? 'N/A'}</td>
               <th scope="row">{state.name}</th>
               {chosen.map(item => {
                 const row = stateValues(datasets[state.slug], item);

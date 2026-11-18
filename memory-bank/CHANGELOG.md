@@ -2,6 +2,8 @@
 
 ## 2026-11-19
 
+- Removed the Category column from Indicators and Rank column from All States. Reduced map label size and weight. Verified static build, route and ranking checks, and Edge table structure and label styling.
+
 - Added carousel card borders and coverage icons. Applied shared category colors to indicator tables, State comparison groups and State fact sheets. Verified build, route and ranking checks, plus Edge card and category styling checks.
 
 - Simplified indicator detail pages to alphabetical defaults and NFHS-6 sort/reset buttons, removed the marked subtitles and status column, and styled the back link as a theme pill. Applied green download buttons with white text to CSV, XLSX and PDF actions. Verified static build, route checks, and Edge sorting, reset, navigation and colors.

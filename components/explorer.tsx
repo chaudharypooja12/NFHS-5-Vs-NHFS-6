@@ -84,10 +84,10 @@ export default function Explorer({mode,place,initialId}:{mode:Mode;place?:Place;
           <div id={groupId} hidden={!expanded}>
             <div className="table-wrap">
               <table aria-label={categoryName+' indicators'}>
-                <thead><tr><th scope="col">Indicator</th><th scope="col">Category</th><th scope="col">Unit</th><th scope="col">Survey rounds</th><th scope="col">Actions</th></tr></thead>
+                <thead><tr><th scope="col">Indicator</th><th scope="col">Unit</th><th scope="col">Survey rounds</th><th scope="col">Actions</th></tr></thead>
                 <tbody>{items.map(item=><tr key={item.id}>
                   <th scope="row">{item.name}</th>
-                  <td>{item.category}</td>
+
                   <td>{item.unit}</td>
                   <td>{[item.five&&'NFHS-5',item.six&&'NFHS-6'].filter(Boolean).join(' · ')}</td><td><Link className="button secondary" href={'/indicators/'+item.id+'/'} aria-label={'View '+item.name}>View</Link></td>
                 </tr>)}</tbody>

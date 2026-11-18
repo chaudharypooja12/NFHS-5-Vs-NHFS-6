@@ -15,3 +15,4 @@ The explorer groups all 212 indicators into 12 category accordions using the cat
 Each row has an Actions column with a View link styled as a button. Indicator names are plain text.
 Indicator detail pages default to alphabetical State order, with NFHS-6 High to Low, Low to High and Clear filters buttons beside CSV. They show four data columns and a theme-colored Back to Indicators page pill.
 Category colors use shared metadata styling, with darker table headers and light content backgrounds.
+The category table columns are Indicator, Unit, Survey rounds and Actions.

@@ -18,3 +18,4 @@ The map legend shows the lowest and highest published State values for the selec
 The full-width map panel shows all 28 State names and places State search beside the indicator selector. Matching results link to State fact sheets. The controls stack on narrow screens.
 The shared header stays at the top during scrolling. The Overview ends with the map section.
 Highlight cards have theme-colored borders. Coverage cards show map, indicator-list and survey-layer icons.
+Map State labels use 7.4px text at weight 600.

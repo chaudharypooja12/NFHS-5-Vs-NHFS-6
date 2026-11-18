@@ -9,7 +9,7 @@ The PRD selects Option B. Use a light background, white cards, blue and indigo a
 | Homepage | Header, hero and survey context, featured national indicators, full-width labeled India map with adjacent indicator and State search controls, featured comparisons, categories, methodology and sources, footer |
 | All States | Two columns with a scrollable State/UT checkbox panel and one performance card containing indicator and ranking-basis selectors, shared sorting buttons, ranks, survey values, validated changes, fact-sheet buttons with eye icons, and XLSX export. The cards stack on mobile. |
 | State factsheets | Each factsheet shows the State name under the State factsheet label, with an All States link, survey availability, filters, an indicator dropdown, metrics, grouped bars, a comparison table, and sources. |
-| Indicators | Category accordions with themed icons and counts, existing search/category/status filters, five-column tables, definitions, units, survey availability, detail pages and sources |
+| Indicators | Title, category and name filters, accordions with themed icons and counts, and four-column tables linking to indicator detail pages |
 | Methodology and sources | Round differences, calculation rules, missing and provisional values, limitations, official references |
 
 ## Interaction and accessibility

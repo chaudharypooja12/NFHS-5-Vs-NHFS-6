@@ -2,6 +2,8 @@
 
 ## 2026-11-18
 
+- Simplified the Indicator explorer heading and removed its Comparison status filter and column. The 252-page static build and route and ranking checks passed. Edge verified the four-column tables, all 212 indicators, category and search filtering, reset, detail links, mobile width, and the State fact-sheet status filter.
+
 - Expanded the Overview map to a full-width panel, labeled all 28 States, and placed State search next to the map indicator. Removed the separate search panel. Edge verified non-overlapping labels, desktop and mobile controls, indicator changes, search, and State fact-sheet navigation.
 - Removed the Comparison status column and ranking note from All States and added a leading eye icon to each fact-sheet action. Edge verified the seven-column table, icon, narrow-screen layout, and Kerala link. The static build, route checks, and ranking checks passed.
 

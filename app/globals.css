@@ -189,11 +189,10 @@ thead th a{color:inherit}
 .category-toggle[aria-expanded=true] .category-chevron{transform:rotate(0)}
 .indicator-category .table-wrap{margin-top:0}
 .indicator-category table{table-layout:fixed;min-width:740px}
-.indicator-category th:first-child{width:40%}
+.indicator-category th:first-child{width:52%}
 .indicator-category th:nth-child(2){width:20%}
-.indicator-category th:nth-child(3){width:8%}
-.indicator-category th:nth-child(4){width:15%}
-.indicator-category th:nth-child(5){width:17%}
+.indicator-category th:nth-child(3){width:10%}
+.indicator-category th:nth-child(4){width:18%}
 @media(max-width:600px){
   .category-toggle{flex-wrap:wrap;padding:12px;font-size:16px}
   .category-name{flex:1}

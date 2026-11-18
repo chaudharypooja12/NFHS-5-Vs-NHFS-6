@@ -127,7 +127,7 @@ export default function StateComparison() {
             </div>
           </div>
         </details>
-        <button className="button secondary" disabled={!ready || !ordered.length || !chosen.length || exporting} onClick={download}><Download size={16}/> {exporting ? 'Preparing XLSX…' : 'Download XLSX'}</button>
+        <button className="button download-button" disabled={!ready || !ordered.length || !chosen.length || exporting} onClick={download}><Download size={16}/> {exporting ? 'Preparing XLSX…' : 'Download XLSX'}</button>
       </div>
       {sortIndicator && <div className="state-sort">
         {chosen.length > 1 && <label className="control">Sort indicator<select value={sortIndicator.id} onChange={event => setSortId(event.target.value)}>

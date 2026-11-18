@@ -2,6 +2,8 @@
 
 ## 2026-11-19
 
+- Simplified indicator detail pages to alphabetical defaults and NFHS-6 sort/reset buttons, removed the marked subtitles and status column, and styled the back link as a theme pill. Applied green download buttons with white text to CSV, XLSX and PDF actions. Verified static build, route checks, and Edge sorting, reset, navigation and colors.
+
 - Defaulted selection to 28 States and moved optional UTs into a collapsed section. Added grouped indicator headers with NFHS-6, NFHS-5 and change columns, keeping one row per geography. Verified static build, route and ranking checks, and multi-indicator and UT selection in Edge.
 
 ## 2026-11-18

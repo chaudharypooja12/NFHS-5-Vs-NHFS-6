@@ -120,12 +120,12 @@ export default function Explorer({mode,place,initialId}:{mode:Mode;place?:Place;
     {mode!=='indicator'&&<label className="control select-main">Indicator<select value={indicator?.id||''} onChange={e=>setId(e.target.value)} disabled={!visible.length}>{!visible.length&&<option value="">No matching indicators found.</option>}{visible.map(i=><option key={i.id} value={i.id}>{i.name}</option>)}</select></label>}
     {!indicator&&<div className="notice"><p role="status">No matching indicators found.</p><button className="button secondary" onClick={()=>{setCategory('');setQuery('');setMapping('');}}>Reset filters</button></div>}
     {indicator&&<>
-      <div className="controls-row">
+      {mode!=='indicator'&&<div className="controls-row">
       {keys.length>1&&<label className="control">Sort<select value={sort} onChange={e=>setSort(e.target.value)}><option value="name">State name</option><option value="5">NFHS-5 value</option><option value="6">NFHS-6 value · high to low</option><option value="6-asc">NFHS-6 value · low to high</option><option value="change">Absolute change</option></select></label>}
       <label className="control">Data availability<select value={availability} onChange={e=>setAvailability(e.target.value)}><option value="">All values</option><option value="both">Both rounds</option><option value="missing">Missing a round</option></select></label>
       <label className="control">Observed change<select value={direction} onChange={e=>setDirection(e.target.value)}><option value="">All changes</option><option value="increase">Increased</option><option value="decrease">Decreased</option><option value="equal">Unchanged</option></select></label>
-      </div>
-      <div className="section-title"><div><h2><HeadingIcon name="chart"/>{indicator.name}</h2><p className="muted">{indicator.category} · {indicator.unit} · {indicator.reviewed?'Reviewed mapping':'Mapping pending'}</p></div><button className="button secondary" onClick={download} disabled={!ready||!sorted.length}><Download size={16}/> CSV</button></div>
+      </div>}
+      <div className="section-title"><div><h2><HeadingIcon name="chart"/>{indicator.name}</h2>{mode!=='indicator'&&<p className="muted">{indicator.category} · {indicator.unit} · {indicator.reviewed?'Reviewed mapping':'Mapping pending'}</p>}</div><div className="state-actions">{mode==='indicator'&&<><button className="button secondary" aria-pressed={sort==='6'} onClick={()=>setSort('6')}>High to Low</button><button className="button secondary" aria-pressed={sort==='6-asc'} onClick={()=>setSort('6-asc')}>Low to High</button>{sort!=='name'&&<button className="button secondary" onClick={()=>setSort('name')}>Clear filters</button>}</>}<button className="button download-button" onClick={download} disabled={!ready||!sorted.length}><Download size={16}/> CSV</button></div></div>
       {!indicator.reviewed&&<p className="notice">This measure is listed under its source survey round while the cross-round mapping is reviewed.</p>}
       {place?.slug==='manipur'&&<p className="notice">NFHS-6 data is unavailable for Manipur. Published NFHS-5 results are available below.</p>}
       {error?<p role="alert">Could not load survey data.</p>:!ready?<p role="status">Loading survey data…</p>:!sorted.length?<div className="notice"><p role="status">No eligible observations for this selection.</p><button className="button secondary" onClick={()=>{setAvailability('');setDirection('');setCategory('');setQuery('');setMapping('');}}>Reset filters</button></div>:<>
@@ -133,13 +133,13 @@ export default function Explorer({mode,place,initialId}:{mode:Mode;place?:Place;
         {mode!=='indicator'&&<SurveyChart rows={sorted.slice(0,8).map(row=>({name:row.name,five:row.five?.value,six:row.six?.value}))}/>}
         {sorted.length>8&&mode!=='indicator'&&<p className="muted">The chart shows the first 8 States. The table includes all results.</p>}
         <div className="table-wrap"><table>
-          <thead><tr><th>Geography</th><th>NFHS-5</th><th>NFHS-6</th><th>Change</th><th>Status</th></tr></thead>
+          <thead><tr><th>Geography</th><th>NFHS-5</th><th>NFHS-6</th><th>Change</th>{mode!=='indicator'&&<th>Status</th>}</tr></thead>
           <tbody>{sorted.map(row=><tr key={row.key}>
             <th scope="row">{row.key==='india'?row.name:<Link href={'/states/'+row.key+'/'}>{row.name}</Link>}</th>
             <td><Cell value={row.five} unit={indicator.unit}/></td>
             <td><Cell value={row.six} unit={indicator.unit}/></td>
             <td>{changeText(row.change,indicator.unit)}</td>
-            <td>{status(row.five,row.six,row.change,indicator)}</td>
+            {mode!=='indicator'&&<td>{status(row.five,row.six,row.change,indicator)}</td>}
           </tr>)}</tbody>
         </table></div>
       </>}

@@ -59,8 +59,8 @@ export default function StateFactSheet({place}: {place: Place}) {
 
   return <>
     <div className="state-actions fact-downloads">
-      <button className="button secondary" disabled={!currentData} onClick={csv}><Download size={16}/> Download CSV</button>
-      <button className="button secondary" disabled={!currentData || exporting} onClick={pdf}><Download size={16}/> {exporting ? 'Preparing PDF…' : 'Download PDF'}</button>
+      <button className="button download-button" disabled={!currentData} onClick={csv}><Download size={16}/> Download CSV</button>
+      <button className="button download-button" disabled={!currentData || exporting} onClick={pdf}><Download size={16}/> {exporting ? 'Preparing PDF…' : 'Download PDF'}</button>
     </div>
     {pdfError && <p role="alert">Could not generate the PDF. Try Download PDF again.</p>}
     <section className="panel fact-overview" aria-label="State overview">

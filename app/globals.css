@@ -245,3 +245,4 @@ thead th a{color:inherit}
 .indicator-category th:nth-child(5){width:12%}
 .indicator-category .button{font-size:12px;padding:6px 12px;text-decoration:none}
 .state-table .indicator-group-heading{white-space:normal;min-width:300px;text-align:center}.territory-selection{margin-top:16px}.territory-selection summary{cursor:pointer;font-weight:700}
+.button.download-button{background:#167344;color:#fff;border-color:#167344}.button.download-button:hover{background:#115c36;color:#fff}.button.back-pill{background:var(--accent);color:#fff;border-radius:999px}.button.back-pill:hover{color:#fff}

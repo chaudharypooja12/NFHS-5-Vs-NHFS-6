@@ -1,4 +1,5 @@
 'use client';
+import {categoryStyle} from '../lib/category-style';
 
 import {Fragment, useEffect, useState} from 'react';
 import Link from 'next/link';
@@ -147,10 +148,10 @@ export default function StateComparison() {
             <thead>
               <tr>
                 <th scope="col" rowSpan={2}>Rank</th><th scope="col" rowSpan={2}>State</th>
-                {chosen.map(item => <th key={item.id} scope="colgroup" colSpan={3} className="indicator-group-heading">{item.name}</th>)}
+                {chosen.map(item => <th key={item.id} scope="colgroup" colSpan={3} className="indicator-group-heading category-heading" style={categoryStyle(item.category)}>{item.name}</th>)}
                 <th scope="col" rowSpan={2}>Actions</th>
               </tr>
-              <tr>{chosen.map(item => <Fragment key={item.id}><th scope="col">NFHS-6</th><th scope="col">NFHS-5</th><th scope="col">Change{item.unit === '%' ? ' (pp)' : ''}</th></Fragment>)}</tr>
+              <tr>{chosen.map(item => <Fragment key={item.id}><th className="category-heading" style={categoryStyle(item.category)} scope="col">NFHS-6</th><th className="category-heading" style={categoryStyle(item.category)} scope="col">NFHS-5</th><th className="category-heading" style={categoryStyle(item.category)} scope="col">Change{item.unit === '%' ? ' (pp)' : ''}</th></Fragment>)}</tr>
             </thead>
             <tbody>{ordered.map(state => <tr key={state.slug}>
               <td>{ranks.get(sortIndicator.id)?.get(state.slug) ?? 'N/A'}</td>
@@ -158,9 +159,9 @@ export default function StateComparison() {
               {chosen.map(item => {
                 const row = stateValues(datasets[state.slug], item);
                 return <Fragment key={item.id}>
-                  <td><ObservationCell value={row.six} unit={item.unit}/></td>
-                  <td><ObservationCell value={row.five} unit={item.unit} historical={row.historical}/></td>
-                  <td>{changeText(row.change, item.unit)}</td>
+                  <td className="category-content" style={categoryStyle(item.category)}><ObservationCell value={row.six} unit={item.unit}/></td>
+                  <td className="category-content" style={categoryStyle(item.category)}><ObservationCell value={row.five} unit={item.unit} historical={row.historical}/></td>
+                  <td className="category-content" style={categoryStyle(item.category)}>{changeText(row.change, item.unit)}</td>
                 </Fragment>;
               })}
               <td>{stateKeys.has(state.slug) ? <Link className="button secondary" aria-label={'View Fact Sheet for ' + state.name} href={'/states/' + state.slug + '/'}><Eye size={14} aria-hidden="true"/>View Fact Sheet</Link> : <span className="muted">Unavailable</span>}</td>

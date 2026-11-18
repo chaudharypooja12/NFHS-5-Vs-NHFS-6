@@ -1,4 +1,5 @@
 'use client';
+import {categoryStyle} from '../lib/category-style';
 
 import {Fragment, useEffect, useState} from 'react';
 import {Download} from 'lucide-react';
@@ -86,8 +87,8 @@ export default function StateFactSheet({place}: {place: Place}) {
               const previous = rows[index - 1]?.indicator;
               const boundary = previous?.category !== indicator.category || Boolean(previous?.six) !== Boolean(indicator.six);
               return <Fragment key={indicator.id}>
-                {boundary && <tr className="fact-category"><th colSpan={4}>{indicator.six ? '' : 'NFHS-5 reference · '}{indicator.category}</th></tr>}
-                <tr><th scope="row">{indicator.six ?? indicator.five}. {indicator.name}</th>
+                {boundary && <tr className="fact-category category-colors" style={categoryStyle(indicator.category)}><th colSpan={4}>{indicator.six ? '' : 'NFHS-5 reference · '}{indicator.category}</th></tr>}
+                <tr className="category-content" style={categoryStyle(indicator.category)}><th scope="row">{indicator.six ?? indicator.five}. {indicator.name}</th>
                   <td><ObservationCell value={six} unit={indicator.unit}/></td>
                   <td><ObservationCell value={five} unit={indicator.unit} historical={historical}/></td>
                   <td>{changeText(change, indicator.unit)}</td></tr>

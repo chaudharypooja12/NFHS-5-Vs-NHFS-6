@@ -16,3 +16,4 @@ All 28 static State fact sheets show a highlighted map, State sample sizes from 
 - [NFHS Data](../NFHS-DATA.md)
 The default comparison order is alphabetical by State name. High to Low and Low to High sort eligible NFHS-6 totals. Clear filters appears during numerical sorting and restores alphabetical order. Ranks use NFHS-6.
 All 28 States are selected by default. Union Territories have a separate collapsed optional section. Select All selects States. The table uses one row per geography with three-column indicator groups for NFHS-6, NFHS-5 and change. The rank column follows the sort indicator.
+State comparison indicator groups and fact-sheet categories use the shared category palette.

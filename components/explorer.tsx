@@ -1,4 +1,5 @@
 'use client';
+import {categoryStyle} from '../lib/category-style';
 import HeadingIcon, {type HeadingIconName} from './heading-icon';
 
 import {useEffect,useMemo,useState} from 'react';
@@ -71,7 +72,7 @@ export default function Explorer({mode,place,initialId}:{mode:Mode;place?:Place;
         const total=indicators.filter(item=>item.category===categoryName).length;
         const expanded=!collapsedCategories.includes(categoryName);
         const groupId='indicator-category-'+categoryName.toLowerCase().replaceAll(' ','-');
-        return <section className="indicator-category" key={categoryName} aria-labelledby={groupId+'-heading'}>
+        return <section className="indicator-category category-colors" style={categoryStyle(categoryName)} key={categoryName} aria-labelledby={groupId+'-heading'}>
           <h2 id={groupId+'-heading'}>
             <button className="category-toggle" type="button" aria-expanded={expanded} aria-controls={groupId} onClick={()=>setCollapsedCategories(previous=>expanded?[...previous,categoryName]:previous.filter(name=>name!==categoryName))}>
               <HeadingIcon name={categoryIcons[categoryName]||'indicators'}/>
@@ -115,7 +116,7 @@ export default function Explorer({mode,place,initialId}:{mode:Mode;place?:Place;
     downloadCsv([fields,...data],'nfhs-'+indicator.id+'.csv');
   }
   return <>
-    <section className="panel explorer">
+    <section className="panel explorer category-colors" style={indicator ? categoryStyle(indicator.category) : undefined}>
     {mode!=='indicator'&&filters}
     {mode!=='indicator'&&<label className="control select-main">Indicator<select value={indicator?.id||''} onChange={e=>setId(e.target.value)} disabled={!visible.length}>{!visible.length&&<option value="">No matching indicators found.</option>}{visible.map(i=><option key={i.id} value={i.id}>{i.name}</option>)}</select></label>}
     {!indicator&&<div className="notice"><p role="status">No matching indicators found.</p><button className="button secondary" onClick={()=>{setCategory('');setQuery('');setMapping('');}}>Reset filters</button></div>}

@@ -246,3 +246,9 @@ thead th a{color:inherit}
 .indicator-category .button{font-size:12px;padding:6px 12px;text-decoration:none}
 .state-table .indicator-group-heading{white-space:normal;min-width:300px;text-align:center}.territory-selection{margin-top:16px}.territory-selection summary{cursor:pointer;font-weight:700}
 .button.download-button{background:#167344;color:#fff;border-color:#167344}.button.download-button:hover{background:#115c36;color:#fff}.button.back-pill{background:var(--accent);color:#fff;border-radius:999px}.button.back-pill:hover{color:#fff}
+.highlight{border:2px solid var(--accent);box-shadow:0 3px 12px #30246622}
+.coverage>div{position:relative;padding-right:56px}.coverage-icon{position:absolute;right:18px;top:20px;width:27px;height:27px}
+.category-colors .category-toggle{background:color-mix(in srgb,var(--category-color) 18%,var(--surface));color:var(--ink)}
+.category-colors thead th,.category-heading,.state-table thead .category-heading,.state-table .fact-category th{background:var(--category-color);color:#fff}
+.category-colors tbody td,.category-colors tbody th,.category-content,.category-content>td,.category-content>th{background:color-mix(in srgb,var(--category-color) 8%,var(--surface))}
+.category-colors .heading-icon{color:var(--category-color)}

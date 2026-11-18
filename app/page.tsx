@@ -1,6 +1,6 @@
 import HeadingIcon from '../components/heading-icon';
 import Link from 'next/link';
-import {ArrowRight} from 'lucide-react';
+import {ArrowRight,Map,ClipboardList,Layers} from 'lucide-react';
 import {readFileSync} from 'node:fs';
 import Highlights from '../components/highlights';
 import IndiaMap from '../components/india-map';
@@ -20,9 +20,9 @@ export default function Home(){
  <p>Explore official health, nutrition and household indicators across India’s {states.length} States, with NFHS-5 comparisons.</p></section>
  <Highlights items={featured}/>
  <section className="coverage" aria-label="Survey coverage">
- <div><span>States in the portal</span><strong>{states.length}</strong></div>
- <div><span>NFHS-6 published indicators</span><strong>{indicators.filter(i=>i.six).length}</strong></div>
- <div><span>Survey rounds</span><strong>2</strong><small>NFHS-5 (2019–21) and NFHS-6 (2023–24)</small></div>
+ <div><Map className="coverage-icon" aria-hidden="true"/><span>States in the portal</span><strong>{states.length}</strong></div>
+ <div><ClipboardList className="coverage-icon" aria-hidden="true"/><span>NFHS-6 published indicators</span><strong>{indicators.filter(i=>i.six).length}</strong></div>
+ <div><Layers className="coverage-icon" aria-hidden="true"/><span>Survey rounds</span><strong>2</strong><small>NFHS-5 (2019–21) and NFHS-6 (2023–24)</small></div>
  </section>
  <section id="explore" className="map-section"><div className="section-title"><h2><HeadingIcon name="map"/>Performance across States</h2><Link className="text-link" href="/states/">All States <ArrowRight size={16}/></Link></div>
  <div className="panel home-map-panel"><IndiaMap/></div></section>

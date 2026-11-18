@@ -41,3 +41,4 @@ The bottom copyright strip uses pure white with dark blue text and retains its e
 Page and section headings use decorative Lucide icons in the accent color, with 30 px page icons and 24 px section icons. Icons are hidden from assistive technology so heading names retain their existing text. Table headers share the accent background, surface-colored text, 12 px padding, and consistent typography and border styling in both themes.
 
 All States supports searchable multi-indicator selection and XLSX export. State fact sheets show the highlighted map, sample sizes, a complete grouped table, and CSV and PDF downloads above the existing explorer.
+Category surfaces share colors through lib/category-style.ts, using dark headings and light content tints with theme-aware backgrounds.

@@ -2,6 +2,8 @@
 
 ## 2026-11-19
 
+- Inlined State sorting before XLSX, expanded comparison and fact-sheet tables, added indicator action eye icons, and removed State-name links from indicator details. Unified State indicators under Table/Charts controls with all 212 charts and category-colored bars. Verified build, routes and Edge switching, counts, controls and table sizing.
+
 - Added checkbox chart selection, survey-round labels, unit-aware bar and axis labels, and indicator captions. Removed chart headings and data tables. Verified build and route checks plus Edge selection and percentage labels.
 
 - Themed both All States scrollbars and replaced the State single-indicator explorer with category charts. Defaulted to Population and Household Profile, with a two-column complete-category grid and a single-indicator option. Removed the marked provisional intro, comparison filter, CSV action, subtitle and metric cards. Verified build, route checks and Edge category selection, grid layout and scrollbar styling.

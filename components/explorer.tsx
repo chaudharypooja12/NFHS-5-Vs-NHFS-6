@@ -4,7 +4,7 @@ import HeadingIcon, {type HeadingIconName} from './heading-icon';
 
 import {useEffect,useMemo,useState} from 'react';
 import Link from 'next/link';
-import {ChevronDown,Download,Search} from 'lucide-react';
+import {ChevronDown,Download,Search,Eye} from 'lucide-react';
 import SurveyChart from './charts';
 import {indicators,states,values,format,changeText,sourceLink,type Dataset,type Indicator,type Place,type Observation} from '../lib/model';
 import Cell from './observation-cell';
@@ -89,7 +89,7 @@ export default function Explorer({mode,place,initialId}:{mode:Mode;place?:Place;
                   <th scope="row">{item.name}</th>
 
                   <td>{item.unit}</td>
-                  <td>{[item.five&&'NFHS-5',item.six&&'NFHS-6'].filter(Boolean).join(' · ')}</td><td><Link className="button secondary" href={'/indicators/'+item.id+'/'} aria-label={'View '+item.name}>View</Link></td>
+                  <td>{[item.five&&'NFHS-5',item.six&&'NFHS-6'].filter(Boolean).join(' · ')}</td><td><Link className="button secondary" href={'/indicators/'+item.id+'/'} aria-label={'View '+item.name}><Eye size={14} aria-hidden="true"/>View</Link></td>
                 </tr>)}</tbody>
               </table>
             </div>
@@ -131,7 +131,7 @@ export default function Explorer({mode,place,initialId}:{mode:Mode;place?:Place;
         <div className="table-wrap"><table>
           <thead><tr><th>Geography</th><th>NFHS-5</th><th>NFHS-6</th><th>Change</th>{mode!=='indicator'&&<th>Status</th>}</tr></thead>
           <tbody>{sorted.map(row=><tr key={row.key}>
-            <th scope="row">{row.key==='india'?row.name:<Link href={'/states/'+row.key+'/'}>{row.name}</Link>}</th>
+            <th scope="row">{row.name}</th>
             <td><Cell value={row.five} unit={indicator.unit}/></td>
             <td><Cell value={row.six} unit={indicator.unit}/></td>
             <td>{changeText(row.change,indicator.unit)}</td>

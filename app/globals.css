@@ -262,3 +262,4 @@ thead th a{color:inherit}
 .state-charts>.filters{margin-top:16px}.state-chart-grid article{overflow:hidden}.state-chart-grid h3{min-height:48px}
 @media(max-width:700px){.state-chart-grid{grid-template-columns:minmax(0,1fr)}}
 .state-chart-grid figure{margin:0}.state-chart-grid figcaption{text-align:center;font-weight:600;margin-top:8px}.state-charts>.filters{align-items:end}
+.performance-table,.fact-table{max-height:none;overflow-x:auto;overflow-y:visible}.state-toolbar{justify-content:flex-start}.fact-results [aria-pressed=true]{background:var(--accent);color:white}

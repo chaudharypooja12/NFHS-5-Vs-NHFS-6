@@ -124,9 +124,7 @@ export default function StateComparison() {
             </div>
           </div>
         </details>
-        <button className="button download-button" disabled={!ready || !ordered.length || !chosen.length || exporting} onClick={download}><Download size={16}/> {exporting ? 'Preparing XLSX…' : 'Download XLSX'}</button>
-      </div>
-      {sortIndicator && <div className="state-sort">
+      {sortIndicator && <div className="state-actions">
         {chosen.length > 1 && <label className="control">Sort indicator<select value={sortIndicator.id} onChange={event => setSortId(event.target.value)}>
           {chosen.map(item => <option key={item.id} value={item.id}>{indicatorLabel(item)}</option>)}
         </select></label>}
@@ -136,6 +134,8 @@ export default function StateComparison() {
           {sort !== 'name' && <button className="button secondary" onClick={() => setSort('name')}>Clear filters</button>}
         </div>
       </div>}
+        <button className="button download-button" disabled={!ready || !ordered.length || !chosen.length || exporting} onClick={download}><Download size={16}/> {exporting ? 'Preparing XLSX…' : 'XLSX'}</button>
+      </div>
       {exportError && <p role="alert">Could not generate the workbook. Try Download XLSX again.</p>}
       {loadError ? <p role="alert">Could not load State data. <button className="button secondary" onClick={() => setRetry(value => value + 1)}>Retry</button></p> :
         !ready ? <p role="status">Loading State data…</p> : !ordered.length || !chosen.length ? <p role="status">Select at least one State and one indicator.</p> :

@@ -6,10 +6,12 @@ import {Download} from 'lucide-react';
 
 import {changeText, type Dataset, type Place} from '../lib/model';
 import {factSheetRows, loadStateDataset, manipurNotice, sampleLabels, stateSample} from '../lib/state-fact-sheet';
+import StateCharts from './state-charts';
 import IndiaMap from './india-map';
 import ObservationCell from './observation-cell';
 
 export default function StateFactSheet({place}: {place: Place}) {
+  const [view, setView] = useState<'table' | 'charts'>('table');
   const [data, setData] = useState<Dataset>();
   const [loadError, setLoadError] = useState(false);
   const [pdfError, setPdfError] = useState(false);
@@ -76,9 +78,9 @@ export default function StateFactSheet({place}: {place: Place}) {
       </div>
     </section>
     <section className="panel fact-results">
-      <h2>Indicators</h2>
+      <div className="section-title"><h2>Indicators</h2><div className="state-actions" role="group" aria-label="Indicator view"><button className="button secondary" aria-pressed={view==='table'} onClick={()=>setView('table')}>Table</button><button className="button secondary" aria-pressed={view==='charts'} onClick={()=>setView('charts')}>Charts</button></div></div>
 
-      {loadError ? <p role="alert">Could not load State data. <button className="button secondary" onClick={() => setRetry(value => value + 1)}>Retry</button></p> : !currentData ? <p role="status">Loading indicators…</p> :
+      {view === 'charts' ? <StateCharts place={place}/> : loadError ? <p role="alert">Could not load State data. <button className="button secondary" onClick={() => setRetry(value => value + 1)}>Retry</button></p> : !currentData ? <p role="status">Loading indicators…</p> :
         <div className="table-wrap fact-table" tabIndex={0} role="region" aria-label={place.name + ' indicators'}>
           <table className="state-table">
             <thead><tr><th scope="col">Indicator</th><th scope="col">NFHS-6</th><th scope="col">NFHS-5</th><th scope="col">Change</th></tr></thead>

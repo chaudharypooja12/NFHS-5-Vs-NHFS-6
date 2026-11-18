@@ -1,7 +1,7 @@
 import {notFound} from 'next/navigation';
 import Link from 'next/link';
 import PageIntro from '../../../components/page-intro';
-import StateCharts from '../../../components/state-charts';
+
 import StateFactSheet from '../../../components/state-fact-sheet';
 import {states} from '../../../lib/model';
 export const generateStaticParams=()=>states.map(({slug})=>({slug}));
@@ -12,6 +12,6 @@ export default async function Page({params}:{params:Promise<{slug:string}>}){
     <Link className="button secondary" href="/states/">← Back to All States</Link>
     <PageIntro icon="state" label="State fact sheet" title={place.name}/>
     <StateFactSheet place={place}/>
-    <StateCharts place={place}/>
+
   </div>;
 }

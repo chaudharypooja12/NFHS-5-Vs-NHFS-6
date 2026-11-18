@@ -38,7 +38,7 @@ assert.match(allStates, /High to Low/);
 assert.match(allStates, /Low to High/);
 assert.doesNotMatch(allStates, /institutional-births-chart|View Institutional births data/);
 assert.match(allStates, /28<!-- --> of <!-- -->28<!-- --> States selected/);
-assert.match(allStates, /Download XLSX/);
+assert.match(allStates, /XLSX/);
 assert.match(allStates, /Search indicators/);
 assert.doesNotMatch(allStates, /Rank by/);
 assert.doesNotMatch(allStates, /Data availability|Observed change/);

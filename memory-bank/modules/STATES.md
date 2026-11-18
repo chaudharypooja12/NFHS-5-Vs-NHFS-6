@@ -20,3 +20,4 @@ State comparison indicator groups and fact-sheet categories use the shared categ
 The comparison table starts with State and shows indicator groups and Actions.
 The complete fact-sheet export is XLSX with Indicator, NFHS-6, NFHS-5 and % Change columns. Values retain published units and validated changes use pp for percentages. The on-page notes and availability/change dropdowns are removed.
 State charts now default to Population and Household Profile with all category indicators in a two-column grid. Complete category or one indicator can be selected. The provisional intro, status filter, chart CSV action, subtitle and metric cards are removed. All States selection and table scrollbars use the theme accent.
+Chart indicators use a checkbox dropdown with Complete category selection. Bars and axis ticks use indicator units, survey rounds appear below bars, and the indicator name is the figure caption. Charts have an accessible value summary.

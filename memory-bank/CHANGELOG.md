@@ -2,6 +2,8 @@
 
 ## 2026-11-19
 
+- Added checkbox chart selection, survey-round labels, unit-aware bar and axis labels, and indicator captions. Removed chart headings and data tables. Verified build and route checks plus Edge selection and percentage labels.
+
 - Themed both All States scrollbars and replaced the State single-indicator explorer with category charts. Defaulted to Population and Household Profile, with a two-column complete-category grid and a single-indicator option. Removed the marked provisional intro, comparison filter, CSV action, subtitle and metric cards. Verified build, route checks and Edge category selection, grid layout and scrollbar styling.
 
 - Replaced complete State CSV download with four-column XLSX. Removed on-page NFHS-6 notes and availability/change filters. Verified build and routes plus the 212-row Mizoram workbook, source values and removals in Edge. Percentage changes retain the validated percentage-point calculation.

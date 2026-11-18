@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-11-19
+
+- Defaulted selection to 28 States and moved optional UTs into a collapsed section. Added grouped indicator headers with NFHS-6, NFHS-5 and change columns, keeping one row per geography. Verified static build, route and ranking checks, and multi-indicator and UT selection in Edge.
+
 ## 2026-11-18
 
 - Set All States to alphabetical order by default, removed Rank by, and fixed numerical sorting to NFHS-6. Clear filters restores alphabetical order. Verified the build, route and ranking checks, and both sort directions and reset in Edge.

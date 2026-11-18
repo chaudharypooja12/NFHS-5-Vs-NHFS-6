@@ -1,6 +1,6 @@
 'use client';
 
-import {useEffect, useState} from 'react';
+import {Fragment, useEffect, useState} from 'react';
 import Link from 'next/link';
 import {ArrowDownWideNarrow,ArrowUpWideNarrow,Download,Eye} from 'lucide-react';
 import {changeText, states, type Dataset} from '../lib/model';
@@ -23,7 +23,7 @@ const unionTerritories = [
   {name:'Puducherry',slug:'puducherry'},
 ];
 const selectionPlaces = [...states, ...unionTerritories].sort((a,b) => a.name.localeCompare(b.name));
-const selectionKeys = selectionPlaces.map(place => place.slug);
+const selectionKeys = states.map(place => place.slug);
 const indicatorLabel = (item: typeof factSheetIndicators[number]) =>
   (item.six ? 'NFHS-6 #' + item.six : 'NFHS-5 #' + item.five) + ' · ' + item.name;
 
@@ -90,13 +90,23 @@ export default function StateComparison() {
         <button className="button secondary" onClick={() => setSelected(selectionKeys)}>Select All</button>
         <button className="button secondary" onClick={() => setSelected([])}>Clear</button>
       </div>
-      <p role="status" className="muted selection-count">{selected.length} of {selectionPlaces.length} selected</p>
-      <p className="muted territory-availability">Union Territory data and fact sheets are unavailable in this dataset.</p>
-      <div className="state-options state-checkbox-list" role="group" aria-label="States and Union Territories">
-        {selectionPlaces.map(state => <label key={state.slug} className="state-checkbox" data-selected={selected.includes(state.slug)}><input type="checkbox" checked={selected.includes(state.slug)}
+      <p role="status" className="muted selection-count">{selected.filter(slug => stateKeys.has(slug)).length} of {states.length} States selected</p>
+
+      <div className="state-options state-checkbox-list" role="group" aria-label="States">
+        {states.map(state => <label key={state.slug} className="state-checkbox" data-selected={selected.includes(state.slug)}><input type="checkbox" checked={selected.includes(state.slug)}
           onChange={event => setSelected(previous => event.target.checked ? [...previous, state.slug] : previous.filter(slug => slug !== state.slug))}/>
           {state.name}</label>)}
       </div>
+      <details className="territory-selection">
+        <summary>Union Territories</summary>
+        <p className="muted">Survey data and fact sheets are unavailable in this dataset.</p>
+        <div className="state-options" role="group" aria-label="Union Territories">
+          {unionTerritories.map(place => <label key={place.slug} className="state-checkbox">
+            <input type="checkbox" checked={selected.includes(place.slug)} onChange={event => setSelected(previous =>
+              event.target.checked ? [...previous, place.slug] : previous.filter(slug => slug !== place.slug))}/>{place.name}
+          </label>)}
+        </div>
+      </details>
     </aside>
     <section className="panel state-data state-comparison-panel">
       <h2><HeadingIcon name="performance"/>State Performance</h2>
@@ -134,18 +144,27 @@ export default function StateComparison() {
         !ready ? <p role="status">Loading State data…</p> : !ordered.length || !chosen.length ? <p role="status">Select at least one State and one indicator.</p> :
         <div className="table-wrap performance-table" tabIndex={0} role="region" aria-label="State comparison results">
           <table className="state-table">
-            <thead><tr><th scope="col">Rank</th><th scope="col">State</th><th scope="col">Selected Indicator</th><th scope="col">NFHS-6</th><th scope="col">NFHS-5</th><th scope="col">Change (pp for %)</th><th scope="col">Actions</th></tr></thead>
-            <tbody>{ordered.flatMap(state => chosen.map(item => {
-              const row = stateValues(datasets[state.slug], item);
-              return <tr key={state.slug + ':' + item.id}>
-                <td>{ranks.get(item.id)?.get(state.slug) ?? 'N/A'}</td>
-                <th scope="row">{state.name}</th><td>{item.name}<small className="flag">{item.category}</small></td>
-                <td><ObservationCell value={row.six} unit={item.unit}/></td>
-                <td><ObservationCell value={row.five} unit={item.unit} historical={row.historical}/></td>
-                <td>{changeText(row.change, item.unit)}</td>
-                <td>{stateKeys.has(state.slug) ? <Link className="button secondary" aria-label={'View Fact Sheet for ' + state.name} href={'/states/' + state.slug + '/'}><Eye size={14} aria-hidden="true"/>View Fact Sheet</Link> : <span className="muted">Unavailable</span>}</td>
-              </tr>;
-            }))}</tbody>
+            <thead>
+              <tr>
+                <th scope="col" rowSpan={2}>Rank</th><th scope="col" rowSpan={2}>State</th>
+                {chosen.map(item => <th key={item.id} scope="colgroup" colSpan={3} className="indicator-group-heading">{item.name}</th>)}
+                <th scope="col" rowSpan={2}>Actions</th>
+              </tr>
+              <tr>{chosen.map(item => <Fragment key={item.id}><th scope="col">NFHS-6</th><th scope="col">NFHS-5</th><th scope="col">Change{item.unit === '%' ? ' (pp)' : ''}</th></Fragment>)}</tr>
+            </thead>
+            <tbody>{ordered.map(state => <tr key={state.slug}>
+              <td>{ranks.get(sortIndicator.id)?.get(state.slug) ?? 'N/A'}</td>
+              <th scope="row">{state.name}</th>
+              {chosen.map(item => {
+                const row = stateValues(datasets[state.slug], item);
+                return <Fragment key={item.id}>
+                  <td><ObservationCell value={row.six} unit={item.unit}/></td>
+                  <td><ObservationCell value={row.five} unit={item.unit} historical={row.historical}/></td>
+                  <td>{changeText(row.change, item.unit)}</td>
+                </Fragment>;
+              })}
+              <td>{stateKeys.has(state.slug) ? <Link className="button secondary" aria-label={'View Fact Sheet for ' + state.name} href={'/states/' + state.slug + '/'}><Eye size={14} aria-hidden="true"/>View Fact Sheet</Link> : <span className="muted">Unavailable</span>}</td>
+            </tr>)}</tbody>
           </table>
         </div>}
     </section>

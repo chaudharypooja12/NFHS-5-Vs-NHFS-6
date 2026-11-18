@@ -244,3 +244,4 @@ thead th a{color:inherit}
 .indicator-category th:nth-child(4){width:16%}
 .indicator-category th:nth-child(5){width:12%}
 .indicator-category .button{font-size:12px;padding:6px 12px;text-decoration:none}
+.state-table .indicator-group-heading{white-space:normal;min-width:300px;text-align:center}.territory-selection{margin-top:16px}.territory-selection summary{cursor:pointer;font-weight:700}

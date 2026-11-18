@@ -237,3 +237,10 @@ thead th a{color:inherit}
   .fact-overview {grid-template-columns:minmax(0,1fr)}
   .state-options {max-height:220px}
 }
+
+.header{position:sticky;top:0;z-index:10}
+.indicator-category th:first-child{width:44%}
+.indicator-category th:nth-child(2){width:18%}
+.indicator-category th:nth-child(4){width:16%}
+.indicator-category th:nth-child(5){width:12%}
+.indicator-category .button{font-size:12px;padding:6px 12px;text-decoration:none}

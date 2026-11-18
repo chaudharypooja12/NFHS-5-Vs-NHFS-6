@@ -16,3 +16,4 @@ The homepage uses the available viewport width with responsive side padding. Key
 The map legend shows the lowest and highest published State values for the selected indicator in its survey unit.
 
 The full-width map panel shows all 28 State names and places State search beside the indicator selector. Matching results link to State fact sheets. The controls stack on narrow screens.
+The shared header stays at the top during scrolling. The Overview ends with the map section.

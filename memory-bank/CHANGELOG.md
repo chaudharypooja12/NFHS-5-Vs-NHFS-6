@@ -2,6 +2,8 @@
 
 ## 2026-11-18
 
+- Removed the Overview comparison card, made the shared header sticky, and added indicator View actions with plain indicator names. Verified the static build, route and ranking checks, and Edge scrolling and navigation across all 212 indicator actions.
+
 - Simplified the Indicator explorer heading and removed its Comparison status filter and column. The 252-page static build and route and ranking checks passed. Edge verified the four-column tables, all 212 indicators, category and search filtering, reset, detail links, mobile width, and the State fact-sheet status filter.
 
 - Expanded the Overview map to a full-width panel, labeled all 28 States, and placed State search next to the map indicator. Removed the separate search panel. Edge verified non-overlapping labels, desktop and mobile controls, indicator changes, search, and State fact-sheet navigation.

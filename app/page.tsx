@@ -26,6 +26,5 @@ export default function Home(){
  </section>
  <section id="explore" className="map-section"><div className="section-title"><h2><HeadingIcon name="map"/>Performance across States</h2><Link className="text-link" href="/states/">All States <ArrowRight size={16}/></Link></div>
  <div className="panel home-map-panel"><IndiaMap/></div></section>
- <section className="panel home-actions"><div><h2><HeadingIcon name="comparison"/>NFHS-6 vs NFHS-5</h2><p className="muted">Review official India totals or compare selected States.</p></div><Link className="button secondary" href="/states/">All States <ArrowRight size={16}/></Link></section>
  </div>;
 }

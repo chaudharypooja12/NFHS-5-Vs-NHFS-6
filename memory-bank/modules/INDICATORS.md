@@ -12,3 +12,4 @@ The explorer groups all 212 indicators into 12 category accordions using the cat
 
 - [Dashboard menu index](INDEX.md)
 - [NFHS Data](../NFHS-DATA.md)
+Each row has an Actions column with a View link styled as a button. Indicator names are plain text.

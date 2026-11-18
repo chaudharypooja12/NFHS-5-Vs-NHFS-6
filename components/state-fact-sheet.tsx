@@ -5,7 +5,7 @@ import {Fragment, useEffect, useState} from 'react';
 import {Download} from 'lucide-react';
 
 import {changeText, type Dataset, type Place} from '../lib/model';
-import {coverageNote, factSheetRows, loadStateDataset, manipurNotice, sampleLabels, stateSample} from '../lib/state-fact-sheet';
+import {factSheetRows, loadStateDataset, manipurNotice, sampleLabels, stateSample} from '../lib/state-fact-sheet';
 import IndiaMap from './india-map';
 import ObservationCell from './observation-cell';
 
@@ -77,7 +77,7 @@ export default function StateFactSheet({place}: {place: Place}) {
     </section>
     <section className="panel fact-results">
       <h2>Indicators</h2>
-      <p className="muted">{coverageNote}</p>
+
       {loadError ? <p role="alert">Could not load State data. <button className="button secondary" onClick={() => setRetry(value => value + 1)}>Retry</button></p> : !currentData ? <p role="status">Loading indicators…</p> :
         <div className="table-wrap fact-table" tabIndex={0} role="region" aria-label={place.name + ' indicators'}>
           <table className="state-table">

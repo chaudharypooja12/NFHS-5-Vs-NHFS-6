@@ -254,3 +254,10 @@ thead th a{color:inherit}
 .category-colors .heading-icon{color:var(--category-color)}
 
 .indicator-category th:first-child{width:58%}.indicator-category th:nth-child(2){width:12%}.indicator-category th:nth-child(3){width:18%}.indicator-category th:nth-child(4){width:12%}
+.state-performance-grid :is(.state-options,.performance-table){scrollbar-color:var(--accent) var(--surface);scrollbar-width:thin}
+.state-performance-grid :is(.state-options,.performance-table)::-webkit-scrollbar{width:10px;height:10px}
+.state-performance-grid :is(.state-options,.performance-table)::-webkit-scrollbar-track{background:var(--surface)}
+.state-performance-grid :is(.state-options,.performance-table)::-webkit-scrollbar-thumb{background:var(--accent);border:2px solid var(--surface);border-radius:8px}
+.state-chart-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.state-chart-grid.single-chart{grid-template-columns:minmax(0,1fr)}
+.state-charts>.filters{margin-top:16px}.state-chart-grid article{overflow:hidden}.state-chart-grid h3{min-height:48px}
+@media(max-width:700px){.state-chart-grid{grid-template-columns:minmax(0,1fr)}}

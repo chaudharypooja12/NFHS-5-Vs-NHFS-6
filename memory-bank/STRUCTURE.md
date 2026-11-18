@@ -99,3 +99,4 @@ public/maps/districts/
 ```
 
 Phase 2 also extends shared comparison, ranking, export, and validation modules. The PRD proposes district directory and detail URLs. Additional district analysis URLs remain open.
+components/state-charts.tsx provides State category chart grids using the shared survey chart and fact-sheet data helpers.

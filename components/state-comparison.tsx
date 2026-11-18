@@ -4,7 +4,7 @@ import {useEffect, useState} from 'react';
 import Link from 'next/link';
 import {ArrowDownWideNarrow,ArrowUpWideNarrow,Download,Eye} from 'lucide-react';
 import {changeText, states, type Dataset} from '../lib/model';
-import {rankingValue,stateRanks,type RankBasis} from '../lib/ranking';
+import {rankingValue,stateRanks} from '../lib/ranking';
 import {factSheetIndicators, loadStateDataset, stateValues} from '../lib/state-fact-sheet';
 import ObservationCell from './observation-cell';
 import HeadingIcon from './heading-icon';
@@ -33,9 +33,9 @@ export default function StateComparison() {
   const [datasets, setDatasets] = useState<Record<string, Dataset>>({});
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('');
-  const [ascending, setAscending] = useState(false);
+  const [sort, setSort] = useState<'name' | 'asc' | 'desc'>('name');
   const [sortId, setSortId] = useState(defaultIndicator);
-  const [basis, setBasis] = useState<RankBasis>();
+
   const [loadError, setLoadError] = useState(false);
   const [exportError, setExportError] = useState(false);
   const [exporting, setExporting] = useState(false);
@@ -55,19 +55,19 @@ export default function StateComparison() {
 
   const chosen = indicatorIds.map(id => factSheetIndicators.find(item => item.id === id)!);
   const sortIndicator = chosen.find(item => item.id === sortId) ?? chosen[0];
-  const rankBasis = basis ?? (sortIndicator?.six ? '6' : '5');
+
   const ready = selected.every(slug => !stateKeys.has(slug) || datasets[slug]);
   const ordered = selectionPlaces.filter(state => selected.includes(state.slug)).sort((a, b) => {
-    if (!sortIndicator) return a.name.localeCompare(b.name);
-    const score = (slug: string) => rankingValue({key: slug, ...stateValues(datasets[slug], sortIndicator)}, rankBasis);
+    if (sort === 'name' || !sortIndicator) return a.name.localeCompare(b.name);
+    const score = (slug: string) => rankingValue({key: slug, ...stateValues(datasets[slug], sortIndicator)}, '6');
     const left = score(a.slug);
     const right = score(b.slug);
     if (left == null || right == null) return Number(left == null) - Number(right == null) || a.name.localeCompare(b.name);
-    return (ascending ? left - right : right - left) || a.name.localeCompare(b.name);
+    return (sort === 'asc' ? left - right : right - left) || a.name.localeCompare(b.name);
   });
   const ranks = new Map(chosen.map(item => [
     item.id,
-    stateRanks(ordered.map(state => ({key: state.slug, ...stateValues(datasets[state.slug], item)})), rankBasis, item),
+    stateRanks(ordered.map(state => ({key: state.slug, ...stateValues(datasets[state.slug], item)})), '6', item),
   ]));
 
   async function download() {
@@ -123,13 +123,10 @@ export default function StateComparison() {
         {chosen.length > 1 && <label className="control">Sort indicator<select value={sortIndicator.id} onChange={event => setSortId(event.target.value)}>
           {chosen.map(item => <option key={item.id} value={item.id}>{indicatorLabel(item)}</option>)}
         </select></label>}
-        <label className="control">Rank by<select value={basis ?? 'auto'} onChange={event => setBasis(event.target.value === 'auto' ? undefined : event.target.value as RankBasis)}>
-          <option value="auto">Indicator’s latest round</option>
-          <option value="6">NFHS-6 value</option><option value="5">NFHS-5 value</option><option value="change">Validated change</option>
-        </select></label>
-        <div className="state-actions sort-buttons" role="group" aria-label="Sort by ranked measure">
-          <button className="button secondary" aria-pressed={!ascending} onClick={() => setAscending(false)}><ArrowDownWideNarrow size={16}/>High to Low</button>
-          <button className="button secondary" aria-pressed={ascending} onClick={() => setAscending(true)}><ArrowUpWideNarrow size={16}/>Low to High</button>
+        <div className="state-actions sort-buttons" role="group" aria-label="Sort by NFHS-6 value">
+          <button className="button secondary" aria-pressed={sort === 'desc'} onClick={() => setSort('desc')}><ArrowDownWideNarrow size={16}/>High to Low</button>
+          <button className="button secondary" aria-pressed={sort === 'asc'} onClick={() => setSort('asc')}><ArrowUpWideNarrow size={16}/>Low to High</button>
+          {sort !== 'name' && <button className="button secondary" onClick={() => setSort('name')}>Clear filters</button>}
         </div>
       </div>}
       {exportError && <p role="alert">Could not generate the workbook. Try Download XLSX again.</p>}

@@ -40,7 +40,7 @@ assert.doesNotMatch(allStates, /institutional-births-chart|View Institutional bi
 assert.match(allStates, /36<!-- --> of <!-- -->36<!-- --> selected/);
 assert.match(allStates, /Download XLSX/);
 assert.match(allStates, /Search indicators/);
-assert.match(allStates, /Rank by/);
+assert.doesNotMatch(allStates, /Rank by/);
 assert.doesNotMatch(allStates, /Data availability|Observed change/);
 for(const route of ['dashboard','compare','rankings']) {
   const page=readFileSync('out/'+route+'/index.html','utf8');

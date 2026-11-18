@@ -6,7 +6,7 @@
 
 **Status** Implemented in the local build
 
-All States provides bulk State selection, searchable indicator selection by category, directional sorting and XLSX export with one sheet per selected indicator. The existing Rank by control supports survey totals and validated change. The default uses the latest round for the sort indicator. Ranks reuse the direction-aware tie and eligibility rules. The eight Union Territory entries retained from the existing dashboard display unavailable values and have no fact-sheet routes. Only the 28 States participate in rankings.
+All States provides bulk State selection, searchable indicator selection by category, directional sorting and XLSX export with one sheet per selected indicator. The default order is alphabetical, with optional NFHS-6 numerical sorting. Ranks reuse the direction-aware tie and eligibility rules. The eight Union Territory entries retained from the existing dashboard display unavailable values and have no fact-sheet routes. Only the 28 States participate in rankings.
 
 The comparison table shows rank, State, selected indicator, survey values, change and actions. The View Fact Sheet link starts with a decorative eye icon.
 
@@ -14,3 +14,4 @@ All 28 static State fact sheets show a highlighted map, State sample sizes from 
 
 - [Dashboard menu index](INDEX.md)
 - [NFHS Data](../NFHS-DATA.md)
+The default comparison order is alphabetical by State name. High to Low and Low to High sort eligible NFHS-6 totals. Clear filters appears during numerical sorting and restores alphabetical order. Ranks use NFHS-6.

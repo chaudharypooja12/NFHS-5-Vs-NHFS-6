@@ -2,6 +2,8 @@
 
 ## 2026-11-18
 
+- Set All States to alphabetical order by default, removed Rank by, and fixed numerical sorting to NFHS-6. Clear filters restores alphabetical order. Verified the build, route and ranking checks, and both sort directions and reset in Edge.
+
 - Removed the Overview comparison card, made the shared header sticky, and added indicator View actions with plain indicator names. Verified the static build, route and ranking checks, and Edge scrolling and navigation across all 212 indicator actions.
 
 - Simplified the Indicator explorer heading and removed its Comparison status filter and column. The 252-page static build and route and ranking checks passed. Edge verified the four-column tables, all 212 indicators, category and search filtering, reset, detail links, mobile width, and the State fact-sheet status filter.

@@ -15,6 +15,4 @@ The homepage uses the available viewport width with responsive side padding. Key
 
 The map legend shows the lowest and highest published State values for the selected indicator in its survey unit.
 
-The map panel places the State selection instructions between the indicator dropdown and the map. The compact State directory uses the same themed scrollbar as the page.
-
-The choropleth uses a tighter SVG view box and a larger centered display area so State boundaries are easier to see on desktop and mobile.
+The full-width map panel shows all 28 State names and places State search beside the indicator selector. Matching results link to State fact sheets. The controls stack on narrow screens.

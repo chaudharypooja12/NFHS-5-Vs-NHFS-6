@@ -55,10 +55,8 @@
 [data-theme=dark] .coverage>div:nth-child(3){--coverage-bg:#392748;--coverage-line:#69497e;--coverage-ink:#ecd1ff}
 .coverage>div{background:var(--coverage-bg);border-color:var(--coverage-line);color:var(--coverage-ink)}
 .coverage span,.coverage small{color:inherit}
-#explore .map-grid>.panel:first-child{background:#eeedff;border-color:#c7c2f2}
-#explore .map-grid>.panel:last-child{background:#e4f5f1;border-color:#acd9d0}
-[data-theme=dark] #explore .map-grid>.panel:first-child{background:#29264d;border-color:#544e87}
-[data-theme=dark] #explore .map-grid>.panel:last-child{background:#193a37;border-color:#3c6e65}
+#explore .home-map-panel{background:#eeedff;border-color:#c7c2f2}
+[data-theme=dark] #explore .home-map-panel{background:#29264d;border-color:#544e87}
 .map-instruction{
   margin-block:12px 8px;
   padding:12px 14px;
@@ -70,7 +68,15 @@
 .map-instruction h3{display:flex;align-items:center;justify-content:center;gap:8px;color:var(--accent);font-weight:750}
 .map-instruction svg{flex:none}
 .map-instruction p{margin-top:3px;color:var(--muted);font-size:13px}
-#explore .india-map{width:min(100%,515px);height:auto;max-height:none;margin-inline:auto}
+#explore .india-map{width:min(100%,1050px);height:auto;max-height:none;margin-inline:auto}
+.map-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.map-state-search{position:relative;display:grid;gap:4px;min-width:0}
+.map-search-results{position:absolute;z-index:2;inset:calc(100% + 5px) 0 auto;background:var(--surface);border:1px solid var(--border);border-radius:9px;box-shadow:0 8px 20px #221c4422;padding:8px}
+.map-search-results .state-list{max-height:240px}
+.map-state-labels{pointer-events:none}
+.map-state-labels text{fill:#241658;stroke:#fff;stroke-width:1.8;stroke-linejoin:round;paint-order:stroke fill;font-size:8px;font-weight:750}
+.map-state-labels line{stroke:#6c609c;stroke-width:.55}
+@media(max-width:600px){.map-controls{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:850px){.highlight-track{grid-auto-columns:calc((100% - 28px)/3)}}
 @media(max-width:600px){
   .reference-home section[aria-labelledby="highlights"]{container-type:inline-size}

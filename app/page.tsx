@@ -4,7 +4,6 @@ import {ArrowRight} from 'lucide-react';
 import {readFileSync} from 'node:fs';
 import Highlights from '../components/highlights';
 import IndiaMap from '../components/india-map';
-import StateDirectory from '../components/state-directory';
 import {indicators,states,values,changeText,type Dataset} from '../lib/model';
 
 export default function Home(){
@@ -26,7 +25,7 @@ export default function Home(){
  <div><span>Survey rounds</span><strong>2</strong><small>NFHS-5 (2019–21) and NFHS-6 (2023–24)</small></div>
  </section>
  <section id="explore" className="map-section"><div className="section-title"><h2><HeadingIcon name="map"/>Performance across States</h2><Link className="text-link" href="/states/">All States <ArrowRight size={16}/></Link></div>
- <div className="map-grid"><section className="panel"><IndiaMap/></section><section className="panel"><h3 className="find-title"><HeadingIcon name="state"/> Find a State</h3><StateDirectory compact/></section></div></section>
+ <div className="panel home-map-panel"><IndiaMap/></div></section>
  <section className="panel home-actions"><div><h2><HeadingIcon name="comparison"/>NFHS-6 vs NFHS-5</h2><p className="muted">Review official India totals or compare selected States.</p></div><Link className="button secondary" href="/states/">All States <ArrowRight size={16}/></Link></section>
  </div>;
 }

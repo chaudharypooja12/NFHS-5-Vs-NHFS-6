@@ -2,7 +2,7 @@
 
 import {useEffect, useState} from 'react';
 import Link from 'next/link';
-import {ArrowDownWideNarrow,ArrowUpWideNarrow,Download} from 'lucide-react';
+import {ArrowDownWideNarrow,ArrowUpWideNarrow,Download,Eye} from 'lucide-react';
 import {changeText, states, type Dataset} from '../lib/model';
 import {rankingValue,stateRanks,type RankBasis} from '../lib/ranking';
 import {factSheetIndicators, loadStateDataset, stateValues} from '../lib/state-fact-sheet';
@@ -132,13 +132,12 @@ export default function StateComparison() {
           <button className="button secondary" aria-pressed={ascending} onClick={() => setAscending(true)}><ArrowUpWideNarrow size={16}/>Low to High</button>
         </div>
       </div>}
-      {sortIndicator && ready && ordered.length > 0 && <p className="muted">Ties share ranks. Missing and small-sample estimates are unranked. Rank direction follows each indicator’s reviewed favorable direction where defined.</p>}
       {exportError && <p role="alert">Could not generate the workbook. Try Download XLSX again.</p>}
       {loadError ? <p role="alert">Could not load State data. <button className="button secondary" onClick={() => setRetry(value => value + 1)}>Retry</button></p> :
         !ready ? <p role="status">Loading State data…</p> : !ordered.length || !chosen.length ? <p role="status">Select at least one State and one indicator.</p> :
         <div className="table-wrap performance-table" tabIndex={0} role="region" aria-label="State comparison results">
           <table className="state-table">
-            <thead><tr><th scope="col">Rank</th><th scope="col">State</th><th scope="col">Selected Indicator</th><th scope="col">NFHS-6</th><th scope="col">NFHS-5</th><th scope="col">Change (pp for %)</th><th scope="col">Comparison status</th><th scope="col">Actions</th></tr></thead>
+            <thead><tr><th scope="col">Rank</th><th scope="col">State</th><th scope="col">Selected Indicator</th><th scope="col">NFHS-6</th><th scope="col">NFHS-5</th><th scope="col">Change (pp for %)</th><th scope="col">Actions</th></tr></thead>
             <tbody>{ordered.flatMap(state => chosen.map(item => {
               const row = stateValues(datasets[state.slug], item);
               return <tr key={state.slug + ':' + item.id}>
@@ -147,8 +146,7 @@ export default function StateComparison() {
                 <td><ObservationCell value={row.six} unit={item.unit}/></td>
                 <td><ObservationCell value={row.five} unit={item.unit} historical={row.historical}/></td>
                 <td>{changeText(row.change, item.unit)}</td>
-                <td>{row.six?.value == null || row.five?.value == null ? 'Unavailable' : !item.reviewed ? 'Mapping pending' : row.change == null ? 'Baseline or sample review' : 'Comparable'}</td>
-                <td>{stateKeys.has(state.slug) ? <Link className="button secondary" aria-label={'View Fact Sheet for ' + state.name} href={'/states/' + state.slug + '/'}>View Fact Sheet</Link> : <span className="muted">Unavailable</span>}</td>
+                <td>{stateKeys.has(state.slug) ? <Link className="button secondary" aria-label={'View Fact Sheet for ' + state.name} href={'/states/' + state.slug + '/'}><Eye size={14} aria-hidden="true"/>View Fact Sheet</Link> : <span className="muted">Unavailable</span>}</td>
               </tr>;
             }))}</tbody>
           </table>

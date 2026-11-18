@@ -2,6 +2,9 @@
 
 ## 2026-11-18
 
+- Expanded the Overview map to a full-width panel, labeled all 28 States, and placed State search next to the map indicator. Removed the separate search panel. Edge verified non-overlapping labels, desktop and mobile controls, indicator changes, search, and State fact-sheet navigation.
+- Removed the Comparison status column and ranking note from All States and added a leading eye icon to each fact-sheet action. Edge verified the seven-column table, icon, narrow-screen layout, and Kerala link. The static build, route checks, and ranking checks passed.
+
 - Integrated the newer All States dashboard on main. Kept the ranking modes, eligibility rules, legacy redirects, and eight unavailable Union Territory entries. Verified the merged 252-page static build, route and ranking checks, and Chrome downloads for the XLSX, 212-row CSV and 15-page PDF.
 
 - Added All States selection, indicator search and sorting, comparison XLSX, and full State fact sheets with the shared map, Appendix 2 sample sizes, CSV and paginated PDF. The static build exported 251 pages. Route and data checks verified 28 State routes, 212 indicator routes and 27 sets of Appendix 2 counts. Local Chrome smoke verified selection, sorting, a two-indicator workbook, a 212-row Kerala CSV, the 15-page A4 Kerala PDF, the highlighted map, narrow-screen width, Manipur availability and the existing Compare route. The local baseline has no implemented district routes to regression-test. Cross-browser, accessibility, and production verification remain open.

@@ -20,3 +20,42 @@
 [data-theme=dark] .highlight{background:var(--surface);color:var(--ink)}[data-theme=dark] .highlight-heading .icon{background:#6550ad}[data-theme=dark] .mini-chart i{background:#b8a3ff}[data-theme=dark] .secondary{background:#393050;border-color:#71618d;color:#f2ebff}[data-theme=dark] :is(.state-list a,.state-grid a):hover{background:#393050}
 @media(max-width:850px){.theme-toggle{margin-left:auto}.highlight-track{grid-auto-columns:calc((100% - 28px)/3)}}
 @media(max-width:600px){.reference-home{padding:36px 0 46px}.reference-intro{margin-bottom:28px}.highlight-track{grid-auto-columns:80%}.coverage{grid-template-columns:1fr;gap:8px}.carousel-controls .button{padding:7px 10px}.home-actions .button{flex:1}}
+.state-comparison {display:grid;grid-template-columns:240px minmax(0,1fr);gap:16px;align-items:start}
+.state-comparison aside h2 {margin-bottom:10px}
+.state-actions,.state-toolbar {display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.state-toolbar {justify-content:space-between}
+.state-comparison aside .state-actions {margin-bottom:8px}
+.state-options,.indicator-options {overflow:auto;overscroll-behavior:contain}
+.state-options {max-height:min(55vh,520px);margin-top:8px;padding:4px}
+.state-options label,.indicator-options label {display:flex;gap:9px;align-items:baseline;padding:5px 2px;cursor:pointer}
+.state-options input,.indicator-options input {flex:none;accent-color:#393991}
+.state-data,.indicator-picker,.state-sort {min-width:0}
+.indicator-picker {position:relative}
+.indicator-picker summary {cursor:pointer}
+.indicator-menu {position:absolute;z-index:3;top:calc(100% + 8px);left:0;width:min(430px,calc(100vw - 68px));max-width:calc(100vw - 68px);padding:14px;background:var(--surface,#fff);color:var(--ink);border:1px solid var(--border);border-radius:10px;box-shadow:0 10px 24px #16163e24}
+.indicator-menu .control + .control {margin-top:8px}
+.indicator-menu input[type=search] {background:var(--bg);color:var(--ink);border:1px solid var(--border);border-radius:8px;padding:8px 10px}
+.indicator-options {max-height:260px;padding:4px}
+.state-sort {display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin:12px 0}
+.state-sort .control {flex:1 1 230px}
+.state-sort [aria-pressed=true] {background:#393991;color:white}
+.state-table {min-width:590px}
+.state-table thead th {background:#393991;color:white}
+.state-table .flag {display:block;margin-left:0}
+.state-table .button {font-size:12px;padding:6px 10px;text-decoration:none}
+.state-table .fact-category th {background:var(--bg);color:var(--ink)}
+.fact-downloads {margin-bottom:16px}
+.fact-overview {display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:center}
+.fact-overview .india-map {max-height:300px}
+.fact-overview .metrics {grid-template-columns:repeat(3,minmax(0,1fr))}
+.fact-overview .metrics dd {margin:0;font-weight:750}
+.fact-table {max-height:70vh;overscroll-behavior:contain}
+.fact-table thead th {position:sticky;top:0;z-index:1}
+.fact-table th[scope=row] {width:54%}
+.fact-notes {list-style:decimal;padding-left:24px}
+.fact-notes li {margin:6px 0}
+[data-theme=dark] .indicator-menu {background:#222039}
+@media(max-width:760px) {
+  .state-comparison,.fact-overview {grid-template-columns:minmax(0,1fr)}
+  .state-options {max-height:220px}
+}

@@ -22,6 +22,8 @@ Comparison statuses are Comparable, Definition Changed, New in NFHS-6, Unavailab
 
 Rank valid observations only and show the round, sort direction, and included count. CSV fields are State, indicator ID, indicator name, category, NFHS-5 value, NFHS-6 value, unit, absolute change, comparison status, and source reference. Preserve missing values and units.
 
+The All States workbook uses State, NFHS-6 and NFHS-5 columns for each selected indicator. State fact-sheet CSV includes the indicator number, category, name, both totals, both publication statuses and source page references. The A4 PDF is rendered from the same complete indicator rows and the projected map geometry. Export libraries are loaded when requested.
+
 ## Verification
 
 - Validate geography and indicator IDs, observation uniqueness, numeric formats, units, missing values, source references, mapping statuses, and calculations at build time.

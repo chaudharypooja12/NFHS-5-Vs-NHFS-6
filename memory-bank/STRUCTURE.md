@@ -42,6 +42,8 @@ NFHS/
 
 Application sources are in app, components, lib, and scripts. The data build reads NFHS-DATA.md and generates data/catalog.json and public/data/*.json. The simplified State boundaries and source metadata are in public/maps. The local static build is in out. The tree below retains the longer-term organization for additional pipeline modules and tests.
 
+The All States and State fact-sheet views live in `components/state-comparison.tsx` and `components/state-fact-sheet.tsx`. Shared observation, download, and map helpers support the existing portal views. State export builders are in `lib/state-workbook.ts` and `lib/state-pdf.ts`. The checked-in NFHS-6 indicator labels and notes are in `data/nfhs6-fact-sheet.json`. Appendix 2 counts and PDF page references are in `data/nfhs6-state-samples.json`.
+
 ```text
 app/
 ├── layout.tsx

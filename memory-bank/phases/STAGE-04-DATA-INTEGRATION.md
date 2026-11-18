@@ -16,6 +16,7 @@
   - [x] Include the PRD fields, units, source references, and comparison statuses.
   - [ ] Verify that exported rows match the selected view and preserve missing data.
 - [ ] Verify integration with official sources.
+  - [x] Verify State fact-sheet inventory and Appendix 2 sample-count coverage at build time. Check a multi-indicator workbook, complete State CSV, and multi-page PDF against the generated dataset (FR-04, FR-09).
   - [ ] Check displayed and exported values and record unresolved discrepancies in [NFHS Data](../NFHS-DATA.md).
 
 [Phase and stage index](INDEX.md)

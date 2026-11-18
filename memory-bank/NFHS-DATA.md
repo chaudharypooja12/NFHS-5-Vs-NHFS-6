@@ -59,6 +59,8 @@ Compared the NFHS-5 release lists and NFHS-6 compendium table of contents with t
 
 Keep Manipur in the directory and show its published NFHS-5 observations when available. Store its NFHS-6 values as null with the geography-level reason. Use the published India estimates with a coverage note and keep Union Territories out of portal geography filters.
 
+State fact sheets use Appendix 2 of the Ministry NFHS-6 PDF (viewer pages 179–180) for household, women and men sample counts. The State dataset has 101 numbered NFHS-6 rows for each covered State and 131 NFHS-5 rows for every State. The complete fact-sheet view presents the 101 NFHS-6 rows in source order, followed by 111 original NFHS-5 reference rows outside the reviewed mappings. Historical totals from the NFHS-6 publication are labeled as such. Their original suppression and small-sample statuses are retained. Population under 5 and under 15 have historical totals where published and await approved cross-round mappings before displaying changes. Anaemia observations are available from NFHS-5.
+
 ## India-level checks
 
 The following examples use the official Total columns. The comparison checks cover the cited fact-sheet definitions and apply to these reviewed India observations.

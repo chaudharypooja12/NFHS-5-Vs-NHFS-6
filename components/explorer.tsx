@@ -3,6 +3,8 @@ import {useEffect,useMemo,useState} from 'react';
 import Link from 'next/link';
 import {Download,Search} from 'lucide-react';
 import SurveyChart from './charts';
+import Cell from './observation-cell';
+import {downloadCsv} from '../lib/download';
 import {indicators,states,values,format,changeText,sourceLink,type Dataset,type Indicator,type Place,type Observation} from '../lib/model';
 
 const categories=[...new Set(indicators.map(item=>item.category))];
@@ -14,10 +16,6 @@ function status(a:Observation|undefined,b:Observation|undefined,change:number|un
   if(a?.value==null||b?.value==null)return 'Data Not Available';
   if(change==null)return 'Baseline or sample review';
   return 'Comparable';
-}
-function Cell({value,unit}:{value?:Observation;unit:string}){
-  if(!value)return <span className="muted">Data Not Available</span>;
-  return <><a title={value.label} href={sourceLink(value)} target="_blank" rel="noreferrer">{format(value.value,unit)}</a>{value.flag!=='published'&&<small className="flag">{value.flag}</small>}</>;
 }
 
 export default function Explorer({mode,place,initialId}:{mode:Mode;place?:Place;initialId?:string}){
@@ -62,9 +60,7 @@ export default function Explorer({mode,place,initialId}:{mode:Mode;place?:Place;
     if(!indicator)return;
     const fields=['State','Indicator ID','Indicator name','Category','NFHS-5 value','NFHS-6 value','Unit','Absolute change','Comparison status','Source reference'];
     const data=sorted.map(row=>[row.name,indicator.id,indicator.name,indicator.category,row.five?.value,row.six?.value,indicator.unit,row.change,status(row.five,row.six,row.change,indicator),[row.five,row.six].filter(Boolean).map(v=>sourceLink(v!)).join(' | ')]);
-    const csv=[fields,...data].map(line=>line.map(value=>'"'+String(value??'').replaceAll('"','""')+'"').join(',')).join('\r\n');
-    const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));
-    const link=document.createElement('a');link.href=url;link.download='nfhs-'+indicator.id+'.csv';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+    downloadCsv([fields,...data],'nfhs-'+indicator.id+'.csv');
   }
   return <>
     {mode==='compare'&&<section className="panel"><div className="section-title"><h2>Choose States</h2><div className="carousel-controls"><button className="button secondary" onClick={()=>setSelected(states.map(s=>s.slug))}>Select all</button><button className="button secondary" onClick={()=>setSelected([])}>Clear</button></div></div><div className="check-grid">{states.map(s=><label key={s.slug}><input type="checkbox" checked={selected.includes(s.slug)} onChange={e=>setSelected(e.target.checked?[...selected,s.slug]:selected.filter(key=>key!==s.slug))}/>{s.name}</label>)}</div></section>}
@@ -88,7 +84,6 @@ export default function Explorer({mode,place,initialId}:{mode:Mode;place?:Place;
         {sorted.length>(rank?12:8)&&mode!=='indicator'&&<p className="muted">The chart shows the first {rank?12:8} States. The table includes all results.</p>}
         <div className="table-wrap"><table><thead><tr>{rank&&<th>Rank</th>}<th>Geography</th><th>NFHS-5</th><th>NFHS-6</th><th>Change</th><th>Status</th></tr></thead><tbody>{sorted.map((row,index)=><tr key={row.key}>{rank&&<td>{ranking.findIndex(item=>score(item)===score(row))+1}</td>}<th scope="row">{row.key==='india'?row.name:<Link href={'/states/'+row.key+'/'}>{row.name}</Link>}</th><td><Cell value={row.five} unit={indicator.unit}/></td><td><Cell value={row.six} unit={indicator.unit}/></td><td>{changeText(row.change,indicator.unit)}</td><td>{status(row.five,row.six,row.change,indicator)}</td></tr>)}</tbody></table></div>
       </>}
-      {place&&mode==='state'&&ready&&<details className="all-values"><summary>All published indicators for {place.name}</summary><div className="table-wrap"><table><thead><tr><th>Indicator</th><th>NFHS-5</th><th>NFHS-6</th><th>Change</th></tr></thead><tbody>{visible.map(item=>{const row=values(datasets[place.slug],item);return <tr key={item.id}><th scope="row"><Link href={'/indicators/'+item.id+'/'}>{item.name}</Link></th><td><Cell value={row.five} unit={item.unit}/></td><td><Cell value={row.six} unit={item.unit}/></td><td>{changeText(row.change,item.unit)}</td></tr>})}</tbody></table></div></details>}
     </>}
     </section>
   </>;

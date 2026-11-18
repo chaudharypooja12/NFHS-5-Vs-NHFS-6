@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-11-18
+
+- Added All States selection, indicator search and sorting, comparison XLSX, and full State fact sheets with the shared map, Appendix 2 sample sizes, CSV and paginated PDF. The static build exported 251 pages. Route and data checks verified 28 State routes, 212 indicator routes and 27 sets of Appendix 2 counts. Local Chrome smoke verified selection, sorting, a two-indicator workbook, a 212-row Kerala CSV, the 15-page A4 Kerala PDF, the highlighted map, narrow-screen width, Manipur availability and the existing Compare route. The local baseline has no implemented district routes to regression-test. Cross-browser, accessibility, and production verification remain open.
+
 ## 2026-11-14
 
 - Renamed the shared header, footer, and page titles to NFHS India. Verified the static build and route checks.

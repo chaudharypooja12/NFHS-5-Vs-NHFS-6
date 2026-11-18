@@ -52,7 +52,8 @@ for (const line of source.split(/\r?\n/)) {
   assert(!place.rows[round][row], 'Duplicate observation');
   const page = round === 5 ? cells[1] : cells[3];
   const obs = observation(cells[round === 5 ? 0 : 1], page, round === 5 ? sourceId : (Number(page) ? '6' : '6-IIPS'));
-  place.rows[round][row] = {...obs, label, ...(round === 6 ? {baseline:observation(cells[0],page,obs.sourceId).value} : {})};
+  const history = round === 6 ? observation(cells[0],page,obs.sourceId) : null;
+  place.rows[round][row] = {...obs, label, ...(history ? {baseline:history.value, baselineFlag:history.flag} : {})};
   if (!catalogs[round].has(row)) catalogs[round].set(row,label);
 }
 assert.equal(places.length,29);

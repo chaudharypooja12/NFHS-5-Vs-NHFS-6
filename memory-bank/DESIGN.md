@@ -8,7 +8,7 @@ The PRD selects Option B. Use a light background, white cards, blue and indigo a
 | --- | --- |
 | Homepage | Header, hero and survey context, featured national indicators, interactive India map, searchable State selector, featured comparisons, categories, methodology and sources, footer |
 | National dashboard | Indicator selector, two survey values, absolute change, interpretation, grouped bar chart, source reference, links to State comparison |
-| State directory and factsheets | Searchable directory of all 28 States. Each factsheet shows the State name under the State factsheet label, with a directory link, survey availability, filters, an indicator dropdown, metrics, grouped bars, a comparison table, and sources. |
+| All States and State fact sheets | Scrollable State checkbox sidebar, searchable indicator picker, blue table headings, directional sorting and spreadsheet export. Fact sheets show the highlighted map, sample sizes, complete grouped indicators, CSV and PDF downloads, and the existing indicator explorer with grouped bars. |
 | Compare | Multi-State and common-indicator selectors, grouped bars, sortable table with change and availability, CSV export |
 | Rankings | Indicator and ranking mode, round label, included count, sort controls, horizontal bars |
 | Indicators | Search and category browsing, definitions, units, survey availability, comparison status, detail pages and sources |
@@ -26,4 +26,4 @@ See the [planned routes](STRUCTURE.md) and the [complete design specification](P
 
 See the [dashboard menu index](modules/INDEX.md) for the route-level design notes.
 
-NFHS India uses an indigo header, saved dark-mode preference, comparison highlights carousel, survey coverage cards, reports library, searchable State directory, indicator-colored map, comparison charts, and responsive tables. Published values link to the fact sheets. The method and source pages explain unavailable data and pending mappings.
+NFHS India uses an indigo header, saved dark-mode preference, comparison highlights carousel, survey coverage cards, reports library, indicator-colored map, comparison charts, and responsive tables. Published values link to their sources. The method and source pages explain unavailable data and pending mappings.

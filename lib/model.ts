@@ -3,7 +3,7 @@ export const {indicators, sources} = catalog;
 export const states = catalog.places.filter(place => place.slug !== 'india');
 export type Indicator = typeof indicators[number];
 export type Place = typeof states[number];
-export type Observation = {value:number|null;flag:string;page:number|null;sourceId:keyof typeof sources;label:string;baseline?:number|null};
+export type Observation = {value:number|null;flag:string;page:number|null;sourceId:keyof typeof sources;label:string;baseline?:number|null;baselineFlag?:string};
 export type Dataset = Place & {rows:Record<5|6, Record<number,Observation>>;changes:Record<number,number>};
 export function values(data:Dataset|undefined, indicator:Indicator) {
   return {

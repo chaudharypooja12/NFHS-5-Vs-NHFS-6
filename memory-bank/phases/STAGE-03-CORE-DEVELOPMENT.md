@@ -14,6 +14,7 @@
   - [x] Build grouped bars, ranking bars, tables, filters, and indicator search.
   - [x] Implement eligible changes, unit formatting, ties, and ranking direction rules.
 - [ ] Verify core behavior.
+  - [x] Verify All States selection, searchable indicator choice, sorting, and State fact-sheet navigation in local Chrome (FR-04, FR-05, FR-08).
   - [ ] Check navigation, generated routes, filters, and keyboard flows with development data.
   - [x] Document route and component decisions in the affected module notes.
 

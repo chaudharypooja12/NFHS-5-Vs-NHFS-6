@@ -30,6 +30,22 @@ for(const state of states) {
 }
 for(const indicator of indicators) assert(existsSync('out/indicators/'+indicator.id+'/index.html'),indicator.id);
 for(const route of ['dashboard','states','compare','rankings','indicators','methodology','sources','reports'])assert(existsSync('out/'+route+'/index.html'),route);
+const allStates=readFileSync('out/states/index.html','utf8');
+assert.match(allStates, /<h1>[\s\S]*?All States<\/h1>/);
+assert.match(allStates, /Select States/);
+assert.match(allStates, /Select Indicators/);
+assert.match(allStates, /High to Low/);
+assert.match(allStates, /Low to High/);
+assert.doesNotMatch(allStates, /institutional-births-chart|View Institutional births data/);
+assert.match(allStates, /36<!-- --> of <!-- -->36<!-- --> selected/);
+assert.match(allStates, /Download XLSX/);
+assert.match(allStates, /Search indicators/);
+assert.match(allStates, /Rank by/);
+assert.doesNotMatch(allStates, /Data availability|Observed change/);
+for(const route of ['dashboard','compare','rankings']) {
+  const page=readFileSync('out/'+route+'/index.html','utf8');
+  assert.match(page, /<meta http-equiv="refresh" content="0;url=\/states\/"\s*\/?\s*>/i, route+' must forward to All States');
+}
 assert.equal(Object.keys(json('out/data/manipur.json').rows[6]).length,0);
 assert(geoArea({type:'FeatureCollection',features})<1, 'Map winding or geometry is invalid');
-console.log('Verified 28 State routes and map shapes, '+indicators.length+' indicator routes, and all dashboard menus.');
+console.log('Verified 28 State routes and map shapes, '+indicators.length+' indicator routes, All States, and legacy forwarding.');

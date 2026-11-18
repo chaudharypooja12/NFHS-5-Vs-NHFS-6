@@ -48,12 +48,12 @@ The All States and State fact-sheet views live in `components/state-comparison.t
 app/
 ├── layout.tsx
 ├── page.tsx
-├── dashboard/page.tsx
+├── dashboard/page.tsx   # Old National URL forwards to All States
 ├── states/
-│   ├── page.tsx
+│   ├── page.tsx        # All States
 │   └── [slug]/page.tsx
-├── compare/page.tsx
-├── rankings/page.tsx
+├── compare/page.tsx     # Old Compare URL forwards to All States
+├── rankings/page.tsx    # Legacy Rankings URL forwards to All States
 ├── indicators/
 │   ├── page.tsx
 │   └── [slug]/page.tsx
@@ -61,6 +61,7 @@ app/
 ├── reports/page.tsx
 └── sources/page.tsx
 components/
+├── heading-icon.tsx    # Shared decorative Lucide heading icons
 ├── layout/
 ├── dashboard/
 ├── charts/
@@ -78,6 +79,7 @@ lib/
 ├── validation/
 └── formatting/
 scripts/
+├── check-ranking.mjs   # Direction, ties, eligibility, zero/missing and real-data checks
 ├── extract/
 ├── transform/
 └── validate/

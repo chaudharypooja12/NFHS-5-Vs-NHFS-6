@@ -3,7 +3,7 @@ import {createReadStream, existsSync, statSync} from 'node:fs';
 import {resolve, extname, sep} from 'node:path';
 
 const root = resolve('out');
-const types = {'.html':'text/html; charset=utf-8','.js':'application/javascript','.css':'text/css','.json':'application/json','.svg':'image/svg+xml','.woff2':'font/woff2','.txt':'text/plain'};
+const types = {'.html':'text/html; charset=utf-8','.js':'application/javascript','.css':'text/css','.json':'application/json','.svg':'image/svg+xml','.jpg':'image/jpeg','.woff2':'font/woff2','.txt':'text/plain'};
 if (!existsSync(resolve(root,'index.html'))) throw new Error('Build the site first.');
 createServer((req,res) => {
   try {

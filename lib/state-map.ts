@@ -14,6 +14,6 @@ export async function loadStateMap(): Promise<MapData> {
   return response.json();
 }
 
-export const mapPath = (map: MapData) => geoPath(geoMercator().fitExtent([[12, 8], [488, 370]], map));
+export const mapPath = (map: MapData, width = 500) => geoPath(geoMercator().fitExtent([[8, 8], [width - 8, 370]], map));
 export const highlightColor = '#393991';
 export const contextColor = '#dce1ef';

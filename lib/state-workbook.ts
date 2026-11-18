@@ -3,7 +3,7 @@ import {downloadFile} from './download';
 import {type Dataset, type Indicator} from './model';
 import {observationStatus, stateValues} from './state-fact-sheet';
 
-export async function downloadStateWorkbook(datasets: Dataset[], indicators: Indicator[]) {
+export async function downloadStateWorkbook(places: {name: string; data?: Dataset}[], indicators: Indicator[]) {
   const workbook = new Workbook();
   workbook.creator = 'NFHS India';
   for (const item of indicators) {
@@ -19,10 +19,10 @@ export async function downloadStateWorkbook(datasets: Dataset[], indicators: Ind
     const header = sheet.addRow(['State', 'NFHS-6', 'NFHS-5']);
     header.font = {bold: true, color: {argb: 'FFFFFFFF'}};
     header.fill = {type: 'pattern', pattern: 'solid', fgColor: {argb: 'FF393991'}};
-    sheet.autoFilter = 'A3:C' + (3 + datasets.length);
-    for (const data of datasets) {
+    sheet.autoFilter = 'A3:C' + (3 + places.length);
+    for (const {name, data} of places) {
       const {five, six, historical} = stateValues(data, item);
-      const row = sheet.addRow([data.name, six?.value ?? null, five?.value ?? null]);
+      const row = sheet.addRow([name, six?.value ?? null, five?.value ?? null]);
       for (const [index, observation] of [six, five].entries()) {
         const cell = row.getCell(index + 2);
         cell.numFmt = item.unit === '%' ? '0.0##"%"' : '0.###';

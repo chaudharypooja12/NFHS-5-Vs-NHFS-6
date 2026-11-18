@@ -1,4 +1,12 @@
-import PageIntro from '../../components/page-intro';
-import Explorer from '../../components/explorer';
-export const metadata={title:"Compare States"};
-export default function Page(){return <div className="shell page"><PageIntro label="State comparisons" title="Compare States">Select States and an indicator to compare published values and download the results.</PageIntro><Explorer mode="compare"/></div>}
+import HeadingIcon from '../../components/heading-icon';
+import Link from 'next/link';
+
+export const metadata = {title: 'All States', robots: {index: false}};
+
+export default function Page() {
+  return <div className="shell page">
+    <meta httpEquiv="refresh" content="0;url=/states/"/>
+    <h1><HeadingIcon name="map"/>All States</h1>
+    <p>The dashboard has moved to <Link className="text-link" href="/states/">All States</Link>.</p>
+  </div>;
+}

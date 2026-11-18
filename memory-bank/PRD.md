@@ -297,6 +297,8 @@ Provide a short explanation when the reason is known.
 
 Users can select multiple States and compare a common indicator.
 
+The 17 November 2026 All States UI update uses a scrollable checkbox panel and a performance table with State, NFHS-6, NFHS-5, and Actions columns. One indicator dropdown and two NFHS-6 sorting buttons replace the previous filter controls. The table exports XLS. The page ends after the comparison cards. The UI lists eight UTs with unavailable results while preserving the existing 28-State survey catalog and routes.
+
 ### Features
 
 - Multi-State selection
@@ -731,11 +733,10 @@ Use readable, search-friendly URLs.
 | Route | Page |
 |---|---|
 | `/` | Homepage |
-| `/dashboard` | National Dashboard |
-| `/states` | State Directory |
+| `/states` | All States, including the India reference and multi-State comparison |
 | `/states/[slug]` | State Dashboard |
-| `/compare` | Multi-State Comparison |
-| `/rankings` | State Rankings |
+| `/dashboard`, `/compare` | Forward to All States |
+| `/rankings` | Legacy URL forwards to All States, which includes State rankings |
 | `/indicators` | Indicator Explorer |
 | `/indicators/[slug]` | Indicator Detail |
 | `/methodology` | Methodology |

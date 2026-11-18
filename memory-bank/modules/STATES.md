@@ -6,7 +6,7 @@
 
 **Status** Implemented in the local build
 
-All States provides bulk State selection, searchable indicator selection by category, directional sorting and XLSX export with one sheet per selected indicator. Sorting uses the selected indicator's NFHS-6 total when available in that round and the NFHS-5 total for NFHS-5 reference indicators. Unavailable values stay at the bottom.
+All States provides bulk State selection, searchable indicator selection by category, directional sorting and XLSX export with one sheet per selected indicator. The existing Rank by control supports survey totals and validated change. The default uses the latest round for the sort indicator. Ranks reuse the direction-aware tie and eligibility rules. The eight Union Territory entries retained from the existing dashboard display unavailable values and have no fact-sheet routes. Only the 28 States participate in rankings.
 
 All 28 static State fact sheets show a highlighted map, State sample sizes from NFHS-6 Appendix 2, and the complete indexed indicator table. The existing indicator explorer and chart are available below the complete table. CSV and A4 PDF include all fact-sheet rows, including NFHS-5 reference rows. Manipur retains its NFHS-5 results and shows why NFHS-6 results and sample counts are unavailable.
 

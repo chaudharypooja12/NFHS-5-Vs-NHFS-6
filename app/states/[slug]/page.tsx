@@ -10,7 +10,7 @@ export default async function Page({params}:{params:Promise<{slug:string}>}){
   const {slug}=await params;const place=states.find(s=>s.slug===slug);if(!place)notFound();
   return <div className="shell page">
     <Link className="button secondary" href="/states/">← Back to All States</Link>
-    <PageIntro label="State fact sheet" title={place.name}/>
+    <PageIntro icon="state" label="State fact sheet" title={place.name}/>
     <StateFactSheet place={place}/>
     <section className="panel"><h2>Explore by indicator</h2><Explorer mode="state" place={place}/></section>
   </div>;
